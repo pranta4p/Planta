@@ -1,18 +1,15 @@
 document.getElementById('submitBtn').addEventListener("click", (event) => {
-    event.preventDefault(); // Prevent the form from submitting and refreshing
+    event.preventDefault(); // Stops the form from submitting
+
     const name = document.getElementById('name').value;
     const type = document.getElementById('type').value;
     const location = document.getElementById('location').value;
-    const location = document.getElementById('location').value;
-    const location = document.getElementById('location').value;
-    const location = document.getElementById('location').value;
-    const location = document.getElementById('location').value;
-    const location = document.getElementById('location').value;
-    // submitBtn.textContent = 'Logging in...';
-    alert("value has been taken");
-    // submitBtn.textContent = 'Login';
-    console.log(name);
-    console.log(email);
-    console.log(password);
+    const price = document.getElementById('price').value;
+    const unit = document.getElementById('unit').value;
+    const sellerName = document.getElementById('sellerName').value;
+    const phone = document.getElementById('phone').value;
+    const description = document.getElementById('description').value;
 
+    alert("value has been taken");
+    console.log(name, type, location, price, unit, sellerName, phone, description);
 });
