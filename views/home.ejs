@@ -1,0 +1,222 @@
+<!DOCTYPE html> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "stylesheet" href = "/css/home.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a class="logo">
+                    <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+
+
+                        <!-- custom design path -->
+                        <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+                        <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+
+
+
+                    </svg>
+                    <span class="logo-text">Planta</span>
+                </a>
+                <div class="nav-links">
+                    <!-- href thakle mouse pointer hoi -->
+                    <a href="/home" style="font-weight: bold; color: #16a34a;">Home</a>
+                    <a href="/marketPlace">Marketplace</a>
+                    <a href="/tutorial">Tutorials</a>
+                    <a href="/weather">Weather</a>
+                    <a href="/blog">Blog</a>
+                    <a href="/agridoc">AgriDoctor</a>
+                </div>
+                <div class="nav-buttons">
+                    <a href="/logIn" class="btn btn-outline" id = "logIn">Login</a>
+                    <a href="/signUp" class="btn btn-primary" id = "signUp">Sign Up</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- AI button -->
+     <button class="AIchat-btn" onclick="window.location.href = 'agridoc.html'">
+        <svg viewBox="0 0 24 24">
+            <path d="M21.05 11.5a9.5 9.5 0 0 1-14.37 8.17L3 21l1.36-4.13a9.5 9.5 0 1 1 16.69-5.37z"/>
+        </svg>
+    </button>
+
+    <!-- Hero/top Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="container">
+            <div class="hero-content">
+                <span class="badge">🌱 Empowering Farmers with Technology</span>
+                <h1 class="hero-title">
+                    Welcome to
+                    <span class="text-green">Planta</span>
+                </h1>
+                <p class="hero-description">
+                    Your comprehensive agricultural platform combining marketplace, disease detection, 
+                    weather updates, and expert guidance - all designed to help farmers thrive in the digital age.
+                </p>
+                <div class="hero-buttons">
+                    <a href="/tutorial" class="btn btn-primary btn-lg">Start Farming Smarter</a>
+                    <a href="/marketPlace" class="btn btn-outline btn-lg">Explore Marketplace</a>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stats-bg"></div>
+        <div class="container">
+            <div class="stats-grid">
+                <!-- changes to -->
+                <div>
+                    <div class="stat-number">10,000+</div>
+                    <div class="stat-label">Farmers Connected</div>
+                </div>
+                <div>
+                    <div class="stat-number">50,000+</div>
+                    <div class="stat-label">Products Listed</div>
+                </div>
+                <div>
+                    <div class="stat-number">95%</div>
+                    <div class="stat-label">Disease Detection Accuracy</div>
+                </div>
+                <div>
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Support Available</div>
+                </div>
+                <!-- changes -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="features-bg"></div>
+        <div class="container features-content">
+            <div class="section-header">
+                <h2 class="section-title">Everything You Need to Succeed</h2>
+                <p class="section-description">
+                    Planta provides comprehensive tools and services to help farmers increase productivity, 
+                    reduce costs, and make informed decisions.
+                </p>
+            </div>
+            
+            <!-- changes to svg viewBox change -->
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="m22 21-3-3m0 0-3-3m3 3 3-3m-3 3-3 3"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Farmer Dashboard</h3>
+                    <p class="feature-description">Manage your profile, track sales history, and add new products to sell</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon">
+                            <path d="m7 7 10 10-5 5V2l5 5Z"/>
+                            <path d="m22 12-4.5 4.5a1.5 1.5 0 0 1-1 .5H8"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Digital Marketplace</h3>
+                    <p class="feature-description">Browse and buy agricultural products with advanced filtering and secure payments</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon">
+                            <path d="M11 2a2 2 0 0 0-2 2v5H4a2 2 0 0 0-2 2v2c0 1.1.9 2 2 2h5v5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-5h5a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-5V4a2 2 0 0 0-2-2h-2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Disease Detection</h3>
+                    <p class="feature-description">Upload crop images for AI-powered disease detection and treatment recommendations</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Expert Chat Support</h3>
+                    <p class="feature-description">Get instant answers to your agricultural questions from our AI assistant</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon">
+                            <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Weather Updates</h3>
+                    <p class="feature-description">Stay informed with current and upcoming weather forecasts for your location</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon">
+                            <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Learning Tutorials</h3>
+                    <p class="feature-description">Access comprehensive tutorials on modern farming techniques and best practices</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon">
+                            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+                            <polyline points="14,2 14,8 20,8"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Farming Blog</h3>
+                    <p class="feature-description">Share your farming journey, success stories, and learnings with the community</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon">
+                            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
+                            <path d="M3 6h18"/>
+                            <path d="M16 10a4 4 0 0 1-8 0"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">AgriDoctor</h3>
+                    <p class="feature-description">AI-powered crop disease detection with personalized treatment recommendations</p>
+                </div>
+            </div>
+            <!-- changes -->
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta">
+        <div class="cta-bg"></div>
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Ready to Transform Your Farming?</h2>
+                <p class="cta-description">
+                    Join thousands of farmers who are already using Planta to increase their productivity and profits.
+                </p>
+                <div class="cta-buttons">
+                    <a href="/signUp" class="btn btn-white btn-lg" id = "CreateSignUp">Create Your Account</a>
+                    <a href="#" class="btn btn-outline-white btn-lg" id = "watchDemo">Watch Demo</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <%- include("layout/footer") %>
+</body>
+</html>

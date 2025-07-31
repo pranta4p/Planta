@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planta - Login</title>
+    <link rel="stylesheet" href="/css/logIn.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Background Image -->
+        <div class="background-image"></div>
+        
+        <div class="main-content">
+            <div class="content-wrapper">
+                <div class="logo-section">
+                    <a href="#" class="logo-link">
+                        <svg class="leaf-icon" viewBox="0 0 24 24">
+                            <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+                            <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+                        </svg>
+                        <span class="logo-text">Planta</span>
+                    </a>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="card-title">Login</h1>
+                        <p class="card-description">
+                            Enter your email and password to access your account
+                        </p>
+                    </div>
+                    <form class="form" onsubmit="handleSubmit(event)">
+                        <div class="card-content">
+                            <div class="form-group">
+                                <label for="email" class="label">Email</label>
+                                <input 
+                                    id="email" 
+                                    type="email" 
+                                    class="input"
+                                    placeholder="farmer@example.com" 
+                                    required
+                                />
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="label">Password</label>
+                                <input 
+                                    id="password" 
+                                    type="password" 
+                                    class="input"
+                                    required 
+                                />
+                            </div>
+                            <div class="forgot-password">
+                                <a href="#">Forgot password?</a>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button 
+                                class="submit-button" 
+                                type="submit"
+                                id="submitBtn"
+                            >
+                                Login
+                            </button>
+                            <div class="signup-link">
+                                Don't have an account? 
+                                <a href="/signUp">Sign up</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/logIn.js"></script>
+</body>
+</html>
