@@ -3,18 +3,24 @@ const MODEL_ENDPOINT = "https://api-inference.huggingface.co/models/linkanjarad/
 
 let uploadedImage = null;
 
-document.getElementById('imageInput').addEventListener('change', function (e) {
+document.getElementById('imageInput').addEventListener('change', function(e) {
     const file = e.target.files[0];
     if (file) {
         uploadedImage = file;
+        
         const reader = new FileReader();
-        reader.onload = function (e) {
-            const img = document.getElementById('previewImage');
-            img.src = e.target.result;
-            img.style.display = 'block';
+        reader.onload = function(e) {
+            document.getElementById('previewImage').src = e.target.result;
+            document.getElementById('uploadPrompt').classList.add('hidden');
+            document.getElementById('imagePreview').classList.remove('hidden');
+            document.getElementById('uploadBtn').textContent = 'Change Image';
             document.getElementById('analyzeBtn').disabled = false;
         };
         reader.readAsDataURL(file);
+        
+        // Clear previous results
+        // document.getElementById('resultsContent').classList.add('hidden');
+        // document.getElementById('resultsPlaceholder').classList.remove('hidden');
     }
 });
 
@@ -41,7 +47,10 @@ async function analyzeImage() {
         const topResult = result[0];
         document.getElementById('diseaseName').textContent = topResult.label;
         document.getElementById('confidenceScore').textContent = (topResult.score * 100).toFixed(2) + '%';
-        //document.getElementById('resultBox').style.display = 'block';
+        // document.getElementById('resultBox').style.display = 'block';
+        // const dname = document.getElementById('diseaseName');
+        // dname.innerHTML = '<h1>Hello</h1>';
+        console.log(topResult.label);
     } catch (err) {
         alert('Error: ' + err.message);
     } finally {
@@ -49,3 +58,23 @@ async function analyzeImage() {
         analyzeBtn.disabled = false;
     }
 }
+
+
+
+// let uploadedImage = null;
+
+// // Image upload functionality
+
+
+// function clearImage() {
+//     uploadedImage = null;
+//     document.getElementById('uploadPrompt').classList.remove('hidden');
+//     document.getElementById('imagePreview').classList.add('hidden');
+//     document.getElementById('uploadBtn').textContent = 'Upload Image';
+//     document.getElementById('analyzeBtn').disabled = true;
+//     document.getElementById('imageInput').value = '';
+    
+//     // Clear results
+//     document.getElementById('resultsContent').classList.add('hidden');
+//     document.getElementById('resultsPlaceholder').classList.remove('hidden');
+// }

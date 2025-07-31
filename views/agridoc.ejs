@@ -136,7 +136,9 @@
                     </div>
                     <div class="results-content" id="resultsContent">
                         <div class="disease-result">
-                            <div class="disease-info">
+                            <div id = "diseaseName"></div>
+                            <div id = "confidenceScore"></div>
+                            <!-- <div class="disease-info">
                                 <h3>Detected Disease:</h3>
                                 <div class="disease-name">Leaf Blight</div>
                             </div>
@@ -148,9 +150,9 @@
                                     92%
                                 </div>
                                 <div class="confidence-badge">High Confidence</div>
-                            </div>
+                            </div> -->
                         </div>
-                        <div class="treatment-section">
+                        <!-- <div class="treatment-section">
                             <h3>
                                 <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
@@ -158,24 +160,14 @@
                                 Recommended Treatment:
                             </h3>
                             <div class="treatment-content">
-                                <p class="treatment-text">Leaf blight is a fungal disease commonly affecting crops. To treat:
-
-1. Remove and destroy infected leaves to prevent spread.
-
-2. Apply copper-based fungicide every 7-10 days.
-
-3. Ensure proper spacing between plants for adequate air circulation.
-
-4. Water at the base of plants rather than overhead.
-
-5. Rotate crops in the affected area for the next planting season.</p>
+                                <p class="treatment-text">
                             </div>
                             <div class="tip-box">
                                 <p class="tip-text">
-                                    <strong>Tip:</strong> For severe cases, consider consulting with a local agricultural expert.
+                                    <strong>Tip:</strong> 
                                 </p>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -220,74 +212,7 @@
         </div>
     </div>
 
-    <script>
-        let uploadedImage = null;
-
-        // Image upload functionality
-        document.getElementById('imageInput').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                uploadedImage = file;
-                
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('previewImage').src = e.target.result;
-                    document.getElementById('uploadPrompt').classList.add('hidden');
-                    document.getElementById('imagePreview').classList.remove('hidden');
-                    document.getElementById('uploadBtn').textContent = 'Change Image';
-                    document.getElementById('analyzeBtn').disabled = false;
-                };
-                reader.readAsDataURL(file);
-                
-                // Clear previous results
-                document.getElementById('resultsContent').classList.add('hidden');
-                document.getElementById('resultsPlaceholder').classList.remove('hidden');
-            }
-        });
-
-        function clearImage() {
-            uploadedImage = null;
-            document.getElementById('uploadPrompt').classList.remove('hidden');
-            document.getElementById('imagePreview').classList.add('hidden');
-            document.getElementById('uploadBtn').textContent = 'Upload Image';
-            document.getElementById('analyzeBtn').disabled = true;
-            document.getElementById('imageInput').value = '';
-            
-            // Clear results
-            document.getElementById('resultsContent').classList.add('hidden');
-            document.getElementById('resultsPlaceholder').classList.remove('hidden');
-        }
-
-        function analyzeImage() {
-            if (!uploadedImage) {
-                alert('Please upload an image to analyze');
-                return;
-            }
-
-            const analyzeBtn = document.getElementById('analyzeBtn');
-            const analyzeText = document.getElementById('analyzeText');
-            const spinner = document.getElementById('spinner');
-
-            // Start loading state
-            analyzeBtn.disabled = true;
-            analyzeText.textContent = 'Analyzing with AI...';
-            spinner.classList.remove('hidden');
-
-            // Simulate analysis
-            setTimeout(() => {
-                // Show results
-                document.getElementById('resultsPlaceholder').classList.add('hidden');
-                document.getElementById('resultsContent').classList.remove('hidden');
-
-                // Reset button
-                analyzeBtn.disabled = false;
-                analyzeText.textContent = 'Analyze with AI';
-                spinner.classList.add('hidden');
-
-                alert('Analysis Complete! Disease detection and treatment recommendations ready');
-            }, 3000);
-        }
-    </script>
+    <script src="/js/agridoc.js"></script>
     <%- include("layout/footer") %>
 </body>
 </html>

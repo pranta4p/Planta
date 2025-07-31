@@ -387,10 +387,6 @@ body {
     margin-bottom: 1rem;
 }
 
-.results-content {
-    display: none;
-}
-
 .disease-result {
     background-color: #f0fdf4;
     border: 1px solid #bbf7d0;
