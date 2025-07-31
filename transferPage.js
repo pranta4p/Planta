@@ -43,6 +43,14 @@ app.get('/marketPlaceProductAdd', (req, res) => {
     res.render("marketPlaceProductAdd", {});
 })
 
+app.get('/tutorialsAdd', (req, res) => {
+    res.render("tutorialsAdd", {});
+})
+
+app.get('/blogAdd', (req, res) => {
+    res.render("blogAdd", {});
+})
+
 app.listen(port, () => {
     console.log(`Example app listening on port http://localhost:${port}`);
 })

@@ -326,13 +326,13 @@ body {
     background-color: #047857;
 }
 
-/* CTA Section */
-.cta-section {
+
+.add-section {
     margin-top: 3rem;
     text-align: center;
 }
 
-.cta-button {
+.add-button {
     background-color: #059669;
     color: white;
     border: none;
@@ -346,7 +346,7 @@ body {
     display: inline-block;
 }
 
-.cta-button:hover {
+.add-button:hover {
     background-color: #047857;
 }
 
