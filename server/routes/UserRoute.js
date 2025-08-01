@@ -1,3 +1,5 @@
+
+
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
@@ -11,10 +13,13 @@ const jwtSecret = process.env.JWT_SECRET;
 const cookieParser = require('cookie-parser');
 router.use(cookieParser());
 
+console.log("HHH");
 /**
  * 
  * Check Login
 */
+
+let f = 0;
 const authMiddleware = (req, res, next ) => {
   const token = req.cookies.token;
 
@@ -42,10 +47,66 @@ const storage = multer.diskStorage({
 });
 const upload=multer({storage:storage});
 
+
+router.get('/', (req, res) => {
+    res.render("home", {f});
+})
+
+router.get('/home', (req, res) => {
+    res.render("home", {f});
+})
+
+router.get('/marketPlace', async (req, res) => {
+  try {
+    const products = await Product.find(); 
+    res.render("marketPlace", { products, f }); 
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    res.status(500).send("Server Error");
+  }
+});
+
 router.get('/marketPlaceProductAdd',authMiddleware, (req, res) => {
     res.render("marketPlaceProductAdd", {});
 })
 
+router.get('/tutorial',authMiddleware, (req, res) => {
+    res.render("tutorial", {f});
+})
+
+router.get('/tutorialsAdd',authMiddleware, (req, res) => {
+    res.render("tutorialsAdd", {});
+})
+
+router.get('/weather', (req, res) => {
+    res.render("weather", {f});
+})
+
+router.get('/blog', (req, res) => {
+    res.render("blog", {f});
+})
+
+router.get('/agridoc', (req, res) => {
+    res.render("agridoc", {f});
+})
+
+router.get('/blogAdd',authMiddleware, (req, res) => {
+    res.render("blogAdd", {});
+})
+
+router.get('/logIn', (req, res) => {
+    res.render("logIn", {});
+})
+
+router.get('/signUp', (req, res) => {
+    res.render("signUp", {});
+})
+
+router.get('/logOut', (req, res) => {
+  res.clearCookie('token');
+  f = 0;
+  res.redirect('/home');
+});
 
 router.post(
   '/marketPlaceProductAdd',
@@ -90,29 +151,6 @@ router.post(
   }
 );
 
-router.get('/marketPlace', async (req, res) => {
-  try {
-    const products = await Product.find(); 
-    res.render("marketPlace", { products }); 
-  } catch (error) {
-    console.error("Error fetching products:", error);
-    res.status(500).send("Server Error");
-  }
-});
-
-router.get('/tutorialsAdd',authMiddleware, (req, res) => {
-    res.render("tutorialsAdd", {});
-})
-
-router.get('/blogAdd',authMiddleware, (req, res) => {
-    res.render("blogAdd", {});
-})
-
-
-
-router.get('/logIn', (req, res) => {
-    res.render("logIn", {});
-})
 router.post('/logIn', async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -141,7 +179,8 @@ router.post('/logIn', async (req, res) => {
     });
 
   
-    res.redirect('/home'); 
+    f = 1;
+    res.redirect('/home');
 
   } catch (err) {
     console.error('Login error:', err.message);
@@ -149,10 +188,6 @@ router.post('/logIn', async (req, res) => {
   }
 });
 
-
-router.get('/signUp', (req, res) => {
-    res.render("signUp", {});
-})
 router.post('/signUp', async(req, res) => {
      console.log(req.body);
     try {
@@ -185,11 +220,6 @@ router.post('/signUp', async(req, res) => {
     res.status(500).send('Server Error');
   }
 })
-
-router.get('/logout', (req, res) => {
-  res.clearCookie('token');
-  res.redirect('/');
-});
 
 
 

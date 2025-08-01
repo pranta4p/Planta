@@ -12,32 +12,10 @@ app.use(express.static("public"));
 app.set("view engine", "ejs");
 //db connection
 connectDB();
-app.get('/', (req, res) => {
-    res.render("home", {});
-})
-
-app.get('/home', (req, res) => {
-    res.render("home", {});
-}) 
-
-app.get('/tutorial', (req, res) => {
-    res.render("tutorial", {});
-})
-
-app.get('/weather', (req, res) => {
-    res.render("weather", {});
-})
-
-app.get('/blog', (req, res) => {
-    res.render("blog", {});
-})
-
-app.get('/agridoc', (req, res) => {
-    res.render("agridoc", {});
-})
 
 app.use('/', require('./server/routes/UserRoute'));
 
 app.listen(port, () => {
     console.log(`app listening on port http://localhost:${port}`);
 })
+console.log("HHH")
