@@ -1,23 +1,24 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
-const port = 2000;
+const connectDB = require('./server/config/db');
+const port = process.env.PORT || 3000;
 
+const path =require('path')
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use(express.urlencoded({extended : true}));
+app.use(express.json());
 app.use(express.static("public"));
-
 app.set("view engine", "ejs");
-
+//db connection
+connectDB();
 app.get('/', (req, res) => {
     res.render("home", {});
 })
 
 app.get('/home', (req, res) => {
     res.render("home", {});
-})
-
-app.get('/marketPlace', (req, res) => {
-    res.render("marketPlace", {});
-})
+}) 
 
 app.get('/tutorial', (req, res) => {
     res.render("tutorial", {});
@@ -35,26 +36,8 @@ app.get('/agridoc', (req, res) => {
     res.render("agridoc", {});
 })
 
-app.get('/logIn', (req, res) => {
-    res.render("logIn", {});
-})
-
-app.get('/signUp', (req, res) => {
-    res.render("signUp", {});
-})
-
-app.get('/marketPlaceProductAdd', (req, res) => {
-    res.render("marketPlaceProductAdd", {});
-})
-
-app.get('/tutorialsAdd', (req, res) => {
-    res.render("tutorialsAdd", {});
-})
-
-app.get('/blogAdd', (req, res) => {
-    res.render("blogAdd", {});
-})
+app.use('/', require('./server/routes/UserRoute'));
 
 app.listen(port, () => {
-    console.log(`Example app listening on port http://localhost:${port}`);
+    console.log(`app listening on port http://localhost:${port}`);
 })

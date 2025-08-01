@@ -30,11 +30,12 @@
                             Enter your information to create your account
                         </p>
                     </div>
-                    <form class="form" onsubmit="handleSubmit(event)">
+                    <form class="form"  method="post" action="/signUp">
                         <div class="card-content">
                             <div class="form-group">
                                 <label for="name" class="label">Full Name</label>
                                 <input 
+                                    name="name"
                                     id="name" 
                                     type="text" 
                                     class="input"
@@ -45,6 +46,7 @@
                             <div class="form-group">
                                 <label for="email" class="label">Email</label>
                                 <input 
+                                    name="email"
                                     id="email" 
                                     type="email" 
                                     class="input"
@@ -55,6 +57,7 @@
                             <div class="form-group">
                                 <label for="password" class="label">Password</label>
                                 <input 
+                                    name="password"
                                     id="password" 
                                     type="password" 
                                     class="input"

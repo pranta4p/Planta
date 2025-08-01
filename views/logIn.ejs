@@ -30,12 +30,14 @@
                             Enter your email and password to access your account
                         </p>
                     </div>
-                    <form class="form" onsubmit="handleSubmit(event)">
+                    <form class="form" method="post" action="/logIn" >
                         <div class="card-content">
                             <div class="form-group">
                                 <label for="email" class="label">Email</label>
                                 <input 
+                                    
                                     id="email" 
+                                    name="email"
                                     type="email" 
                                     class="input"
                                     placeholder="farmer@example.com" 
@@ -46,6 +48,7 @@
                                 <label for="password" class="label">Password</label>
                                 <input 
                                     id="password" 
+                                    name="password"
                                     type="password" 
                                     class="input"
                                     required 

@@ -27,12 +27,13 @@
                     <div class="card-header">
                         <h1 class="card-title">Product Details</h1>
                     </div>
-                    <form class="form" onsubmit="handleSubmit(event)">
+                    <form class="form" method="post" action="/marketPlaceProductAdd" enctype="multipart/form-data">
                         <div class="card-content">
                             <div class="form-group">
                                 <label for="text" class="label">Name</label>
                                 <input 
                                     id="name" 
+                                    name="name"
                                     type="text" 
                                     class="input"
                                     required 
@@ -42,6 +43,7 @@
                                 <label for="text" class="label">Type</label>
                                 <select 
                                     id="type" 
+                                    name="type"
                                     type="text" 
                                     class="input"
                                     required 
@@ -55,6 +57,7 @@
                                 <label for="text" class="label">Location</label>
                                 <input 
                                     id="location" 
+                                    name="location"
                                     type="text" 
                                     class="input"
                                     required 
@@ -64,6 +67,7 @@
                                 <label for="text" class="label">Price</label>
                                 <input 
                                     id="price" 
+                                    name="price"
                                     type="text" 
                                     class="input"
                                     required 
@@ -73,6 +77,7 @@
                                 <label for="text" class="label">Unit</label>
                                 <input 
                                     id="unit" 
+                                    name="unit"
                                     type="text" 
                                     class="input"
                                     required 
@@ -82,6 +87,7 @@
                                 <label for="text" class="label">Seller Name</label>
                                 <input 
                                     id="sellerName" 
+                                    name="sellerName"
                                     type="text" 
                                     class="input"
                                     required 
@@ -91,6 +97,7 @@
                                 <label for="text" class="label">Phone No.</label>
                                 <input 
                                     id="phone" 
+                                    name="phone"
                                     type="text" 
                                     class="input"
                                     required 
@@ -100,6 +107,7 @@
                                 <label for="text" class="label">Description</label>
                                 <input 
                                     id="description" 
+                                    name="description"
                                     type="text" 
                                     class="input"
                                     required 
@@ -109,6 +117,7 @@
                                 <label for="text" class="label">Image Link</label>
                                 <input 
                                     id="img" 
+                                    name="img"
                                     type="file" 
                                     class="input"
                                     accept="image/*"
