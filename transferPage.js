@@ -23,6 +23,10 @@ app.get('/tutorial', (req, res) => {
     res.render("tutorial", {});
 })
 
+app.get('/weather', (req, res) => {
+    res.render("weather", {});
+})
+
 app.get('/blog', (req, res) => {
     res.render("blog", {});
 })
