@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
 const Product=require('../models/Product');
-const Tutorial=require('../models/Tutorial')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const multer=require('multer')
@@ -12,10 +11,13 @@ const jwtSecret = process.env.JWT_SECRET;
 const cookieParser = require('cookie-parser');
 router.use(cookieParser());
 
+console.log("HHH");
 /**
  * 
  * Check Login
 */
+
+let f = 0;
 const authMiddleware = (req, res, next ) => {
   const token = req.cookies.token;
 
@@ -25,25 +27,10 @@ const authMiddleware = (req, res, next ) => {
 
   try {
     const decoded = jwt.verify(token, jwtSecret);
-     req.user = decoded; 
-    //  console.log(req.user);
-    // req.userId = decoded.userId;
+    req.userId = decoded.userId;
     next();
   } catch(error) {
     res.status(401).json( { message: 'Unauthorized'} );
-  }
-}
-const alreadyLogedInMiddleware=(req,res,next)=>{
-    const token = req.cookies.token;
-
-  if(token) {
-    return res.status(401).json( { message: 'you are already loged in'} );
-  }
-
-  try {
-    next();
-  } catch(error) {
-    res.status(401).json( { message: 'authorization failed'} );
   }
 }
 
@@ -70,7 +57,7 @@ router.get('/home', (req, res) => {
 router.get('/marketPlace', async (req, res) => {
   try {
     const products = await Product.find(); 
-    res.render("marketPlace", { products }); 
+    res.render("marketPlace", { products, f }); 
   } catch (error) {
     console.error("Error fetching products:", error);
     res.status(500).send("Server Error");
@@ -230,7 +217,7 @@ router.post('/logIn', async (req, res) => {
       sameSite: 'lax', 
     });
 
-  
+    f = 1;
     res.redirect('/home'); 
 
   } catch (err) {
