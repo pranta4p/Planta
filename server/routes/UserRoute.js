@@ -1,9 +1,8 @@
-
-
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
-const Product=require('../models/Product')
+const Product=require('../models/Product');
+const Tutorial=require('../models/Tutorial')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const multer=require('multer')
@@ -13,13 +12,10 @@ const jwtSecret = process.env.JWT_SECRET;
 const cookieParser = require('cookie-parser');
 router.use(cookieParser());
 
-console.log("HHH");
 /**
  * 
  * Check Login
 */
-
-let f = 0;
 const authMiddleware = (req, res, next ) => {
   const token = req.cookies.token;
 
@@ -29,10 +25,25 @@ const authMiddleware = (req, res, next ) => {
 
   try {
     const decoded = jwt.verify(token, jwtSecret);
-    req.userId = decoded.userId;
+     req.user = decoded; 
+    //  console.log(req.user);
+    // req.userId = decoded.userId;
     next();
   } catch(error) {
     res.status(401).json( { message: 'Unauthorized'} );
+  }
+}
+const alreadyLogedInMiddleware=(req,res,next)=>{
+    const token = req.cookies.token;
+
+  if(token) {
+    return res.status(401).json( { message: 'you are already loged in'} );
+  }
+
+  try {
+    next();
+  } catch(error) {
+    res.status(401).json( { message: 'authorization failed'} );
   }
 }
 
@@ -59,7 +70,7 @@ router.get('/home', (req, res) => {
 router.get('/marketPlace', async (req, res) => {
   try {
     const products = await Product.find(); 
-    res.render("marketPlace", { products, f }); 
+    res.render("marketPlace", { products }); 
   } catch (error) {
     console.error("Error fetching products:", error);
     res.status(500).send("Server Error");
@@ -70,12 +81,16 @@ router.get('/marketPlaceProductAdd',authMiddleware, (req, res) => {
     res.render("marketPlaceProductAdd", {});
 })
 
-router.get('/tutorial',authMiddleware, (req, res) => {
+router.get('/tutorial', (req, res) => {
     res.render("tutorial", {f});
 })
 
-router.get('/tutorialsAdd',authMiddleware, (req, res) => {
+router.get('/tutorialsAdd',authMiddleware, async(req, res) => {
+  try {
     res.render("tutorialsAdd", {});
+  } catch (error) {
+    res.status(500).send("Server Error");
+  }
 })
 
 router.get('/weather', (req, res) => {
@@ -151,6 +166,43 @@ router.post(
   }
 );
 
+router.post('/tutorialsAdd',authMiddleware, async(req, res) => {
+     try {
+      const {
+        name,
+        title,
+        description,
+        duration,
+        attribute1,
+        attribute2, 
+        attribute3,
+      } = req.body;
+    
+        
+      const imagePath = req.file ? `./uploads/${req.file.filename}` : null;
+      const user = await User.findById(req.user.userId);
+      // console.log(imagePath);
+      const tutorial = new Tutorial({
+       name,
+        title,
+        description,
+        duration,
+        attribute1,
+        attribute2, 
+        attribute3,
+        author_name:user.name,
+        image: imagePath,
+      });
+      // console.log(tutorial);
+      const p=await tutorial.save();
+      res.redirect('/tutorial');
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Failed to add tutorial');
+    }
+  
+})
+
 router.post('/logIn', async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -169,7 +221,7 @@ router.post('/logIn', async (req, res) => {
     }
 
     //  Generate JWT token
-    const token = jwt.sign({ userId: user._id }, jwtSecret, { expiresIn: '1h' });
+    const token = jwt.sign({ userId: user._id, name: user.name }, jwtSecret, { expiresIn: '1h' });
 
  
     res.cookie('token', token, {
@@ -179,8 +231,7 @@ router.post('/logIn', async (req, res) => {
     });
 
   
-    f = 1;
-    res.redirect('/home');
+    res.redirect('/home'); 
 
   } catch (err) {
     console.error('Login error:', err.message);
@@ -189,7 +240,7 @@ router.post('/logIn', async (req, res) => {
 });
 
 router.post('/signUp', async(req, res) => {
-     console.log(req.body);
+    //  console.log(req.body);
     try {
     const {email, password,name } = req.body;
 
