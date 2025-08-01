@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
 const Product=require('../models/Product');
+const Tutorial=require('../models/Tutorial')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const multer=require('multer')
@@ -32,6 +33,20 @@ const authMiddleware = (req, res, next ) => {
     res.status(401).json( { message: 'Unauthorized'} );
   }
 }
+const alreadyLogedInMiddleware=(req,res,next)=>{
+    const token = req.cookies.token;
+
+  if(token) {
+    return res.status(401).json( { message: 'you are already loged in'} );
+  }
+
+  try {
+    next();
+  } catch(error) {
+    res.status(401).json( { message: 'authorization failed'} );
+  }
+}
+
 
 //for store image
 const storage = multer.diskStorage({
