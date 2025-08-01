@@ -16,8 +16,7 @@ console.log("HHH");
  * 
  * Check Login
 */
-
-let f = 0;
+let f=0;
 const authMiddleware = (req, res, next ) => {
   const token = req.cookies.token;
 
@@ -68,8 +67,9 @@ router.get('/marketPlaceProductAdd',authMiddleware, (req, res) => {
     res.render("marketPlaceProductAdd", {});
 })
 
-router.get('/tutorial', (req, res) => {
-    res.render("tutorial", {f});
+router.get('/tutorial', async(req, res) => {
+    const tutorials=await Tutorial.find();
+    res.render("tutorial", {tutorials,f});
 })
 
 router.get('/tutorialsAdd',authMiddleware, async(req, res) => {
@@ -166,7 +166,8 @@ router.get('/marketPlace', async (req, res) => {
 router.get('/tutorialsAdd',authMiddleware, (req, res) => {
     res.render("tutorialsAdd", {});
 })
-router.post('/tutorialsAdd',authMiddleware, async(req, res) => {
+router.post('/tutorialsAdd',authMiddleware,
+  upload.single('img'), async(req, res) => {
      try {
       const {
         name,
@@ -239,7 +240,7 @@ router.post('/logIn',  async (req, res) => {
       sameSite: 'lax', 
     });
 
-    f = 1;
+    f=1;
     res.redirect('/home'); 
 
   } catch (err) {
