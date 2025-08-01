@@ -17,7 +17,6 @@ console.log("HHH");
  * 
  * Check Login
 */
-let f=0;
 const authMiddleware = (req, res, next ) => {
   const token = req.cookies.token;
 
@@ -61,15 +60,25 @@ const upload=multer({storage:storage});
 
 
 router.get('/', (req, res) => {
+  const token = req.cookies.token;
+  let f=0;
+  if(token){f=1;}
     res.render("home", {f});
 })
 
 router.get('/home', (req, res) => {
+   const token = req.cookies.token;
+  let f=0;
+  if(token){f=1;}
     res.render("home", {f});
 })
 
 router.get('/marketPlace', async (req, res) => {
   try {
+  const token = req.cookies.token;
+  let f=0;
+  if(token){f=1;}
+
     const products = await Product.find(); 
     res.render("marketPlace", { products, f }); 
   } catch (error) {
@@ -83,6 +92,9 @@ router.get('/marketPlaceProductAdd',authMiddleware, (req, res) => {
 })
 
 router.get('/tutorial', async(req, res) => {
+  const token = req.cookies.token;
+  let f=0;
+  if(token){f=1;}
     const tutorials=await Tutorial.find();
     res.render("tutorial", {tutorials,f});
 })
@@ -96,14 +108,23 @@ router.get('/tutorialsAdd',authMiddleware, async(req, res) => {
 })
 
 router.get('/weather', (req, res) => {
+  const token = req.cookies.token;
+  let f=0;
+  if(token){f=1;}
     res.render("weather", {f});
 })
 
 router.get('/blog', (req, res) => {
+    const token = req.cookies.token;
+    let f=0;
+    if(token){f=1;}
     res.render("blog", {f});
 })
 
 router.get('/agridoc', (req, res) => {
+    const token = req.cookies.token;
+    let f=0;
+    if(token){f=1;}
     res.render("agridoc", {f});
 })
 
@@ -121,7 +142,6 @@ router.get('/signUp', (req, res) => {
 
 router.get('/logOut', (req, res) => {
   res.clearCookie('token');
-  f = 0;
   res.redirect('/home');
 });
 
