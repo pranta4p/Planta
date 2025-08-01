@@ -1,39 +1,39 @@
-const tutorials = [
-    {
-        id: 1,
-        title: "Modern Irrigation Techniques",
-        description : "Learn about drip irrigation, sprinkler systems, and water conservation methods for optimal crop yield.",
-        author_name : "Dr. Sarah Johnson",
-        duration : "45 min",
-        attribute1 : "Irrigation",
-        attribute2 : "Water Management",
-        attribute3 : "Beginner",
-        image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=1000&auto=format&fit=crop"
-    },
-    {
-        id: 2,
-        title: "Organic Tomato Farming",
-        description : "Master the art of growing healthy, pesticide-free tomatoes using organic farming methods.",
-        author_name : "Michael Chen",
-        duration : "32 min",
-        attribute1 : "Organic",
-        attribute2 : "Tomatoes",
-        attribute3 : "Intermediate",
-        image: "https://images.unsplash.com/photo-1592921870583-aeafb0639ffe?q=80&w=1000&auto=format&fit=crop"
-    },
-    {
-        id: 1,
-        title: "Modern Irrigation Techniques",
-        description : "Learn about drip irrigation, sprinkler systems, and water conservation methods for optimal crop yield.",
-        author_name : "Dr. Sarah Johnson",
-        duration : "45 min",
-        attribute1 : "Irrigation",
-        attribute2 : "Water Management",
-        attribute3 : "Beginner",
-        image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=1000&auto=format&fit=crop"
-    },
+// const tutorials = [
+//     {
+//         id: 1,
+//         title: "Modern Irrigation Techniques",
+//         description : "Learn about drip irrigation, sprinkler systems, and water conservation methods for optimal crop yield.",
+//         author_name : "Dr. Sarah Johnson",
+//         duration : "45 min",
+//         attribute1 : "Irrigation",
+//         attribute2 : "Water Management",
+//         attribute3 : "Beginner",
+//         image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=1000&auto=format&fit=crop"
+//     },
+//     {
+//         id: 2,
+//         title: "Organic Tomato Farming",
+//         description : "Master the art of growing healthy, pesticide-free tomatoes using organic farming methods.",
+//         author_name : "Michael Chen",
+//         duration : "32 min",
+//         attribute1 : "Organic",
+//         attribute2 : "Tomatoes",
+//         attribute3 : "Intermediate",
+//         image: "https://images.unsplash.com/photo-1592921870583-aeafb0639ffe?q=80&w=1000&auto=format&fit=crop"
+//     },
+//     {
+//         id: 1,
+//         title: "Modern Irrigation Techniques",
+//         description : "Learn about drip irrigation, sprinkler systems, and water conservation methods for optimal crop yield.",
+//         author_name : "Dr. Sarah Johnson",
+//         duration : "45 min",
+//         attribute1 : "Irrigation",
+//         attribute2 : "Water Management",
+//         attribute3 : "Beginner",
+//         image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=1000&auto=format&fit=crop"
+//     },
     
-];
+// ];
 // name need to be tutorials with a 's' meaning not tutorial
 
 function renderTutorials(TutorialsToRender) {

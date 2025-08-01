@@ -27,13 +27,14 @@
                     <div class="card-header">
                         <h1 class="card-title">Product Details</h1>
                     </div>
-                    <form class="form" onsubmit="handleSubmit(event)">
+                    <form class="form" action="tutorialsAdd" method="post">
                         
                         <div class="card-content">
                             <div class="form-group">
                                 <label for="text" class="label">Name</label>
                                 <input 
                                     id="name" 
+                                    name="name"
                                     type="text" 
                                     class="input"
                                     required 
@@ -43,6 +44,7 @@
                                 <label for="text" class="label">Title</label>
                                 <input 
                                     id="title" 
+                                    name="title"
                                     type="text" 
                                     class="input"
                                     required 
@@ -52,6 +54,7 @@
                                 <label for="text" class="label">Description</label>
                                 <input 
                                     id="description" 
+                                    name="description"
                                     type="text" 
                                     class="input"
                                     required 
@@ -63,6 +66,7 @@
                                 <label for="text" class="label">Duration</label>
                                 <input 
                                     id="duration" 
+                                    name="duration"
                                     type="text" 
                                     class="input"
                                     required 
@@ -72,6 +76,7 @@
                                 <label for="text" class="label">Attribute1</label>
                                 <input 
                                     id="attribute1" 
+                                    name="attribute1"
                                     type="text" 
                                     class="input"
                                     required 
@@ -81,6 +86,7 @@
                                 <label for="text" class="label">Attribute2</label>
                                 <input 
                                     id="attribute2" 
+                                    name="attribute2"
                                     type="text" 
                                     class="input"
                                     required 
@@ -90,6 +96,7 @@
                                 <label for="text" class="label">Attribute3</label>
                                 <input 
                                     id="attribute3" 
+                                    name="attribute3"
                                     type="text" 
                                     class="input"
                                     required 
@@ -99,6 +106,7 @@
                                 <label for="text" class="label">Image Link</label>
                                 <input 
                                     id="img" 
+                                    name="img"
                                     type="file" 
                                     class="input"
                                     accept="image/*"

@@ -119,7 +119,9 @@
             <a href="/tutorialsAdd" class="add-button">Add Tutorial</a>
         </div>
     </div>
-
+     <script>
+  const products = <%- JSON.stringify(tutorials) %>;
+</script>
     <script src="/js/tutorial.js"></script>
     <%- include("layout/footer") %>
 </body>

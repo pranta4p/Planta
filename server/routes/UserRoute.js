@@ -153,6 +153,19 @@ router.post(
   }
 );
 
+router.get('/marketPlace', async (req, res) => {
+  try {
+    const products = await Product.find(); 
+    res.render("marketPlace", { products }); 
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    res.status(500).send("Server Error");
+  }
+});
+
+router.get('/tutorialsAdd',authMiddleware, (req, res) => {
+    res.render("tutorialsAdd", {});
+})
 router.post('/tutorialsAdd',authMiddleware, async(req, res) => {
      try {
       const {
@@ -166,7 +179,7 @@ router.post('/tutorialsAdd',authMiddleware, async(req, res) => {
       } = req.body;
     
         
-      const imagePath = req.file ? `./uploads/${req.file.filename}` : null;
+       const imagePath = req.file ? `./uploads/${req.file.filename}` : null;
       const user = await User.findById(req.user.userId);
       // console.log(imagePath);
       const tutorial = new Tutorial({
@@ -190,7 +203,16 @@ router.post('/tutorialsAdd',authMiddleware, async(req, res) => {
   
 })
 
-router.post('/logIn', async (req, res) => {
+router.get('/blogAdd',authMiddleware, (req, res) => {
+    res.render("blogAdd", {});
+})
+
+
+
+router.get('/logIn',alreadyLogedInMiddleware, (req, res) => {
+    res.render("logIn", {});
+})
+router.post('/logIn',  async (req, res) => {
   try {
     const { email, password } = req.body;
     console.log(req.body);
@@ -226,6 +248,10 @@ router.post('/logIn', async (req, res) => {
   }
 });
 
+
+router.get('/signUp', alreadyLogedInMiddleware,(req, res) => {
+    res.render("signUp", {});
+})
 router.post('/signUp', async(req, res) => {
     //  console.log(req.body);
     try {

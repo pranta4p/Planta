@@ -1,5 +1,5 @@
 document.getElementById('submitBtn').addEventListener("click", (event) => {
-    event.preventDefault(); // Stops the form from submitting
+   
 
     const name = document.getElementById('name').value;
     const title = document.getElementById('title').value;
