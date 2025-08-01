@@ -1,3 +1,31 @@
+const products = [
+    {
+        id: 1,
+        name: "Organic Tomatoes",
+        type: "Vegetables",
+        location: "Rural County",
+        price: 2.99,
+        unit: "kg",
+        seller: "John Doe",
+        phone: "+1 234-567-8901",
+        description: "Fresh organic tomatoes grown without pesticides",
+        image: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?q=80&w=1000&auto=format&fit=crop"
+    },
+    {
+        id: 2,
+        name: "Fresh Apples",
+        type: "Fruits",
+        location: "Apple Valley",
+        price: 1.99,
+        unit: "kg",
+        seller: "Jane Smith",
+        phone: "+1 234-567-8902",
+        description: "Crisp and juicy apples directly from our orchard",
+        image: "https://images.unsplash.com/photo-1570913149827-d2ac84ab3f9a?q=80&w=1000&auto=format&fit=crop"
+    }
+];
+// name need to be products with a 's' meaning not product
+
 let cart = [];
 
 function renderProducts(productsToRender) {
