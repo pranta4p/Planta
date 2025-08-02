@@ -75,7 +75,7 @@ function renderTutorials(TutorialsToRender) {
                     <span class="tag">${tutorial.attribute2}</span>
                     <span class="tag">${tutorial.attribute3}</span>
                 </div>
-                <a href="#" class="tutorial-button">Watch Tutorial</a>
+                <a href="${tutorial.videoLink}" class="tutorial-button">Watch Tutorial</a>
             </div>
         </div>
     `).join('');
