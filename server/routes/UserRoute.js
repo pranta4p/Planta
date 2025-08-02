@@ -313,7 +313,7 @@ router.get('/blogDetail/:id', async(req, res) => {
     res.render("blogDetail", {blog, f});
 })
 
-router.get('/addToCard/:id',authMiddleware, async(req, res) => {
+router.get('/addToCart/:id',authMiddleware, async(req, res) => {
      try {
        const productId = req.params.id;
      const user = await User.findById(req.user.userId);
