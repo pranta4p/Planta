@@ -8,13 +8,14 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const multer=require('multer')
 const path =require('path')
+const mongoose = require('mongoose');
 
 const jwtSecret = process.env.JWT_SECRET;
 const cookieParser = require('cookie-parser');
 router.use(cookieParser());
 require('dotenv').config();
 
-// console.log("HHH");
+
 /**
  * 
  * Check Login
@@ -23,7 +24,6 @@ const authMiddleware = (req, res, next ) => {
   const token = req.cookies.token;
 
   if(!token) {
-    // return res.status(401).json( { message: 'Please Login first'} );
     return res.status(401).render("messagePage", {
        message: "Please login first",
      redirectUrl: "/login"
@@ -273,30 +273,28 @@ router.get('/marketPlace', async (req, res) => {
     res.render("marketPlace", {f, userData, products});
 });
 
-router.get('/myCart', async (req, res) => {
-  const token = req.cookies.token;
+router.get('/myCart',authMiddleware, async (req, res) => {
+    const token = req.cookies.token;
     let f = 0;
     let userData = null;
-
-    if (token) {
-        try {
+    try {
             const decoded = jwt.verify(token, jwtSecret);
             const userId = decoded.userId;
             userData=await User.findById(userId);
             const cart = userData.cart; 
             f = 1;
-            
-            // console.log(userData);
-            const products = await Product.find();
-            // console.log(products);
-            res.render("myCart", {f, cart,products,userData});
+            if (!userData || !cart) return res.render({f, products: [],userData });
+
+              // Filter valid MongoDB ObjectId strings
+            const validCartIds = cart.filter(
+                  id => mongoose.Types.ObjectId.isValid(id)
+                );
+            const products = await Product.find({ _id: { $in: validCartIds } });//products which is added in card
+            res.render("myCart", {f,products,userData});
 
         } catch (err) {
             console.error("Invalid token", err.message);
         }
-    }
-
-    
 });
 
 router.get('/myProduct', async (req, res) => {
@@ -320,7 +318,7 @@ router.get('/myProduct', async (req, res) => {
     }
 
     const products = await Product.find();
-    console.log(products);
+    // console.log(products);
     res.render("myProduct", {f, userData, products});
 });
 
@@ -340,10 +338,7 @@ router.get('/dash', async(req, res) => {
             const userId = decoded.userId;
 
             userData = await User.findById(userId); 
-
             f = 1;
-            
-
         } catch (err) {
             console.error("Invalid token", err.message);
         }

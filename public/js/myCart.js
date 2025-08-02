@@ -1,7 +1,7 @@
 function renderProducts(productsToRender) {
     const grid = document.getElementById('products-grid');
     const noResults = document.getElementById('no-results');
-
+    
     if (productsToRender.length === 0) {
         grid.style.display = 'none';
         noResults.style.display = 'block';
