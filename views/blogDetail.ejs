@@ -44,16 +44,10 @@
             </nav>
         </div>
     </header>
-    <div class="bodyCard">
-        <div class="card">
-          <img src="https://images.unsplash.com/photo-1592921870583-aeafb0639ffe?q=80&w=1000&auto=format&fit=crop" alt="Card Image" class="card-img">
-          <h1 class="card-title">Your Title Here</h1>
-          <p class="card-desc">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce viverra, justo a facilisis gravida, 
-            ligula nulla dignissim mauris, sit amet porta augue nulla a turpis. Proin convallis ante sed turpis convallis,
-            nec porta odio eleifend. Etiam ut nulla in lorem rutrum dictum.
-          </p>
-        </div>
-    </div>
+    <div id="bodyCard" class = "bodyCard"></div>
+    <script>
+        const blogs = <%- JSON.stringify(blogs) %>;
+    </script>
+    <script src="/js/blogDetail.js"></script>
 </body>
 </html>

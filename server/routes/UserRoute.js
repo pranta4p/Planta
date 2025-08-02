@@ -121,11 +121,14 @@ router.get('/blog', async(req, res) => {
 
 })
 
-router.get('/blogDetail', (req, res) => {
+router.get('/blogDetail/:id', async(req, res) => {
     const token = req.cookies.token;
     let f=0;
     if(token){f=1;}
-    res.render("blogDetail", {f});
+    const blogId = req.params.id;
+    const blogs = await Blog.findById(blogId);
+    console.log(blogs.title);
+    res.render("blogDetail", {blogs, f});
 })
 
 router.get('/agridoc', (req, res) => {
