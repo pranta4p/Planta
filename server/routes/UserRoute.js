@@ -70,6 +70,13 @@ const storage = multer.diskStorage({
 const upload=multer({storage:storage});
 
 
+
+
+//get request
+//------######------
+
+
+
 router.get('/', (req, res) => {
   const token = req.cookies.token;
   let f=0;
@@ -143,6 +150,69 @@ router.get('/logOut', (req, res) => {
   res.redirect('/home');
 });
 
+
+
+router.get('/marketPlace', async (req, res) => {
+  try {
+    const token = req.cookies.token;
+    let f=0;
+    if(token){f=1;}
+
+    const products = await Product.find(); 
+    res.render("marketPlace", { products, f }); 
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    res.status(500).send("Server Error");
+  }
+});
+
+router.get('/tutorialsAdd',authMiddleware, (req, res) => {
+    res.render("tutorialsAdd", {});
+})
+
+
+
+//all get request /id:
+//------#####----------
+
+
+
+router.get('/blogDetail/:id', async(req, res) => {
+    const token = req.cookies.token;
+    let f=0;
+    if(token){f=1;}
+    const blogId = req.params.id;
+    const blog = await Blog.findById(blogId);
+    console.log(blog.title);
+    console.log(blog);
+    res.render("blogDetail", {blog, f});
+})
+
+router.get('/addToCart/:id',authMiddleware, async(req, res) => {
+     try {
+       const productId = req.params.id;
+     const user = await User.findById(req.user.userId);
+     user.cart.push(productId);
+     await user.save();
+    return res.status(401).render("messagePage", {
+       message: "Added to your card",
+     redirectUrl: "/marketPlace"
+     });
+     } catch (error) {
+      res.status(400).send(error);
+     }
+     
+})
+
+
+
+
+
+//all post request for saveing to db:
+//------#####----------
+
+
+
 router.post(
   '/marketPlaceProductAdd',
   authMiddleware,
@@ -188,23 +258,6 @@ router.post(
   }
 );
 
-router.get('/marketPlace', async (req, res) => {
-  try {
-    const token = req.cookies.token;
-    let f=0;
-    if(token){f=1;}
-
-    const products = await Product.find(); 
-    res.render("marketPlace", { products, f }); 
-  } catch (error) {
-    console.error("Error fetching products:", error);
-    res.status(500).send("Server Error");
-  }
-});
-
-router.get('/tutorialsAdd',authMiddleware, (req, res) => {
-    res.render("tutorialsAdd", {});
-})
 router.post('/tutorialsAdd',authMiddleware,
   upload.single('img'), async(req, res) => {
      try {
@@ -293,41 +346,6 @@ router.post('/blogAdd',authMiddleware,
 })
 
 
-
-
-//all get /id:
-//------#####----------
-
-
-
-
-
-router.get('/blogDetail/:id', async(req, res) => {
-    const token = req.cookies.token;
-    let f=0;
-    if(token){f=1;}
-    const blogId = req.params.id;
-    const blog = await Blog.findById(blogId);
-    console.log(blog.title);
-    console.log(blog);
-    res.render("blogDetail", {blog, f});
-})
-
-router.get('/addToCart/:id',authMiddleware, async(req, res) => {
-     try {
-       const productId = req.params.id;
-     const user = await User.findById(req.user.userId);
-     user.cart.push(productId);
-     await user.save();
-    return res.status(401).render("messagePage", {
-       message: "Added to your card",
-     redirectUrl: "/marketPlace"
-     });
-     } catch (error) {
-      res.status(400).send(error);
-     }
-     
-})
 
 
 
