@@ -14,6 +14,9 @@ const UserSchema = new Schema({
    name: {
     type: String,
   },
+  image: {
+    type: String,
+  },
    postedProducts: [{
     type: Schema.Types.ObjectId,
     ref: 'Product'

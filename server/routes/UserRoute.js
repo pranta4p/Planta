@@ -605,11 +605,11 @@ router.post('/logIn',  async (req, res) => {
 router.get('/signUp', alreadyLogedInMiddleware,(req, res) => {
     res.render("signUp", {});
 })
-router.post('/signUp', async(req, res) => {
+router.post('/signUp',upload.single('img'), async(req, res) => {
      console.log(req.body);
     try {
     const {email, password,name } = req.body;
-
+      const imagePath = req.file ? `/uploads/${req.file.filename}` : null;
     // Check if user already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -627,6 +627,7 @@ router.post('/signUp', async(req, res) => {
       name,
       email,
       password: hashedPassword,
+      image:imagePath
     });
 
     // Save to DB
