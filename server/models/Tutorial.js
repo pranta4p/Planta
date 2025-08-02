@@ -29,7 +29,11 @@ const tutorialSchema = new mongoose.Schema({
   },
   image: {
     type: String,
-  }
+  },
+  videoLink: {
+    type: String,
+    required: true
+  },
 }, {
   timestamps: true
 });
