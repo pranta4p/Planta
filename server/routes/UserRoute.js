@@ -21,7 +21,12 @@ const authMiddleware = (req, res, next ) => {
   const token = req.cookies.token;
 
   if(!token) {
-    return res.status(401).json( { message: 'Please Login first'} );
+    // return res.status(401).json( { message: 'Please Login first'} );
+    return res.status(401).render("messagePage", {
+       message: "Please login first",
+     redirectUrl: "/login"
+     });
+
   }
 
   try {
@@ -36,7 +41,11 @@ const alreadyLogedInMiddleware=(req,res,next)=>{
     const token = req.cookies.token;
 
   if(token) {
-    return res.status(401).json( { message: 'you are already loged in'} );
+    return res.status(401).render("messagePage", {
+       message: 'you are already loged in',
+     redirectUrl: "/"
+     });
+    
   }
 
   try {
@@ -252,14 +261,20 @@ router.post('/logIn',  async (req, res) => {
     //  Check if user exists
     const user = await  User.findOne({ email });;
     if (!user) {
-      return res.status(400).send('Invalid email or password');
+      return res.status(401).render("messagePage", {
+       message: 'Invalid email or password',
+     redirectUrl: "/login"
+     });
     }
     console.log(user);
 
     // Compare password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).send('Invalid password');
+       return res.status(401).render("messagePage", {
+       message: 'Invalid password',
+       redirectUrl: "/login"
+       });
     }
 
     //  Generate JWT token
@@ -293,7 +308,10 @@ router.post('/signUp', async(req, res) => {
     // Check if user already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(400).send('User already exists,login please');
+       return res.status(401).render("messagePage", {
+       message: 'User already exists,login please',
+       redirectUrl: "/login"
+       }); 
     }
 
     // Hash the password
