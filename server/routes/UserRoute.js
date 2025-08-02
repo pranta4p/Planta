@@ -14,7 +14,7 @@ const cookieParser = require('cookie-parser');
 router.use(cookieParser());
 require('dotenv').config();
 
-console.log("HHH");
+// console.log("HHH");
 /**
  * 
  * Check Login
@@ -91,7 +91,7 @@ router.get('/', async(req, res) => {
             userData = await User.findById(userId); 
 
             f = 1;
-            console.log(userData);
+            // console.log(userData);
 
         } catch (err) {
             console.error("Invalid token", err.message);
@@ -116,7 +116,7 @@ router.get('/home', async (req, res) => {
             userData = await User.findById(userId); 
 
             f = 1;
-            console.log(userData);
+            
 
         } catch (err) {
             console.error("Invalid token", err.message);
@@ -145,7 +145,7 @@ router.get('/tutorial', async(req, res) => {
             userData = await User.findById(userId); 
 
             f = 1;
-            console.log(userData);
+            // console.log(userData);
 
         } catch (err) {
             console.error("Invalid token", err.message);
@@ -177,7 +177,7 @@ router.get('/weather', async(req, res) => {
             userData = await User.findById(userId); 
 
             f = 1;
-            console.log(userData);
+            // console.log(userData);
 
         } catch (err) {
             console.error("Invalid token", err.message);
@@ -200,7 +200,7 @@ router.get('/blog', async(req, res) => {
             userData = await User.findById(userId); 
 
             f = 1;
-            console.log(userData);
+            // console.log(userData);
 
         } catch (err) {
             console.error("Invalid token", err.message);
@@ -225,7 +225,7 @@ router.get('/agridoc', async(req, res) => {
             userData = await User.findById(userId); 
 
             f = 1;
-            console.log(userData);
+            // console.log(userData);
 
         } catch (err) {
             console.error("Invalid token", err.message);
@@ -248,10 +248,6 @@ router.get('/logOut', (req, res) => {
   res.redirect('/home');
 });
 
-
-
-
-
 router.get('/marketPlace', async (req, res) => {
   const token = req.cookies.token;
     let f = 0;
@@ -265,7 +261,7 @@ router.get('/marketPlace', async (req, res) => {
             userData = await User.findById(userId); 
 
             f = 1;
-            console.log(userData);
+            // console.log(userData);
 
         } catch (err) {
             console.error("Invalid token", err.message);
@@ -273,7 +269,58 @@ router.get('/marketPlace', async (req, res) => {
     }
 
     const products = await Product.find();
+    // console.log(products[0].id);
     res.render("marketPlace", {f, userData, products});
+});
+
+router.get('/myCart', async (req, res) => {
+  const token = req.cookies.token;
+    let f = 0;
+    let userData = null;
+
+    if (token) {
+        try {
+            const decoded = jwt.verify(token, jwtSecret);
+            const userId = decoded.userId;
+
+            userData = await User.findById(userId); 
+
+            f = 1;
+            // console.log(userData);
+
+        } catch (err) {
+            console.error("Invalid token", err.message);
+        }
+    }
+
+    const products = await Product.find();
+    console.log(products);
+    res.render("myCart", {f, userData, products});
+});
+
+router.get('/myProduct', async (req, res) => {
+  const token = req.cookies.token;
+    let f = 0;
+    let userData = null;
+
+    if (token) {
+        try {
+            const decoded = jwt.verify(token, jwtSecret);
+            const userId = decoded.userId;
+
+            userData = await User.findById(userId); 
+
+            f = 1;
+            // console.log(userData);
+
+        } catch (err) {
+            console.error("Invalid token", err.message);
+        }
+    }
+
+    const products = await Product.find();
+    console.log(products);
+    res.render("myProduct", {f, userData, products});
 });
 
 router.get('/tutorialsAdd',authMiddleware, (req, res) => {
@@ -294,7 +341,7 @@ router.get('/dash', async(req, res) => {
             userData = await User.findById(userId); 
 
             f = 1;
-            console.log(userData);
+            
 
         } catch (err) {
             console.error("Invalid token", err.message);
@@ -317,8 +364,8 @@ router.get('/blogDetail/:id', async(req, res) => {
     if(token){f=1;}
     const blogId = req.params.id;
     const blog = await Blog.findById(blogId);
-    console.log(blog.title);
-    console.log(blog);
+    // console.log(blog.title);
+    // console.log(blog);
     res.render("blogDetail", {blog, f});
 })
 
@@ -369,7 +416,7 @@ router.post(
         
       const imagePath = req.file ? `/uploads/${req.file.filename}` : null;
 
-      console.log(imagePath);
+      // console.log(imagePath);
       const product = new Product({
         name,
         type,
@@ -381,7 +428,7 @@ router.post(
         description,
         image: imagePath,
       });
-      // console.log(product);
+      console.log(product);
       const savedproduct=await product.save();
       user.postedProducts.push(savedproduct._id);
        await user.save();
@@ -410,7 +457,7 @@ router.post('/tutorialsAdd',authMiddleware,
         
        const imagePath = req.file ? `/uploads/${req.file.filename}` : null;
       const user = await User.findById(req.user.userId);
-      // console.log(imagePath);
+      console.log(imagePath);
       const tutorial = new Tutorial({
        name,
         title,
@@ -423,12 +470,12 @@ router.post('/tutorialsAdd',authMiddleware,
         videoLink,
         image: imagePath,
       });
-      // console.log(tutorial);
+      console.log(tutorial);
        
       const savedtutorial=await tutorial.save();
       user.postedTutorials.push(savedtutorial._id);
        await user.save()
-      // console.log(user);
+      console.log(user);
       res.redirect('/tutorial');
     } catch (error) {
       console.error(error);
@@ -455,7 +502,7 @@ router.post('/blogAdd',authMiddleware,
         
        const imagePath = req.file ? `/uploads/${req.file.filename}` : null;
       const user = await User.findById(req.user.userId);
-      // console.log(imagePath);
+      console.log(imagePath);
       const blog = new Blog({
         title,
         summary,
@@ -466,12 +513,12 @@ router.post('/blogAdd',authMiddleware,
         description,
         image: imagePath,
       });
-      // console.log(blog);
+      console.log(blog);
       const savedblog=await blog.save();
       user.postedBlogs.push(savedblog._id);
        await user.save();
-       console.log(user);
-      if(savedblog)console.log("bolg added successfully");
+      //  console.log(user);
+      // if(savedblog)console.log("bolg added successfully");
       res.redirect('/blog');
     } catch (error) {
       console.error(error);
@@ -498,7 +545,7 @@ router.get('/logIn',alreadyLogedInMiddleware, (req, res) => {
 router.post('/logIn',  async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log(req.body);
+    // console.log(req.body);
     //  Check if user exists
     const user = await  User.findOne({ email });;
     if (!user) {
@@ -507,7 +554,7 @@ router.post('/logIn',  async (req, res) => {
      redirectUrl: "/login"
      });
     }
-    console.log(user);
+    // console.log(user);
 
     // Compare password
     const isMatch = await bcrypt.compare(password, user.password);
@@ -542,7 +589,7 @@ router.get('/signUp', alreadyLogedInMiddleware,(req, res) => {
     res.render("signUp", {});
 })
 router.post('/signUp', async(req, res) => {
-    //  console.log(req.body);
+     console.log(req.body);
     try {
     const {email, password,name } = req.body;
 
@@ -568,7 +615,7 @@ router.post('/signUp', async(req, res) => {
     // Save to DB
     await newUser.save();
 
-    console.log('User saved:', newUser);
+    // console.log('User saved:', newUser);
     res.redirect('/logIn');
 
   } catch (err) {

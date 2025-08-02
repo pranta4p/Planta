@@ -41,21 +41,21 @@
             <!-- Profile Section -->
             <div class="profile-section">
                 <div class="profile-image">
-                    <img src="https://unsplash.com/photos/the-sun-is-setting-over-a-mountain-lake-zOmGS_euezA" alt="Farmer Profile" />
+                    <img src="./uploads/1754067234766.jpeg" alt="Farmer Profile" />
                 </div>
-                <h1 class="farmer-name">John Smith</h1>
-                <p class="farmer-email">john.smith@agroconnect.com</p>
+                <h1 class="farmer-name"><%= userData.name %></h1>
+                <p class="farmer-email"><%= userData.email %></p>
             </div>
 
             <!-- Action Links -->
             <div class="action-links">
-                <a href="#" class="action-link">
+                <a href="/myCart" class="action-link">
                     <span class="icon">🛒</span>
-                    <span>Your Cart</span>
+                    <span>My Cart</span>
                 </a>
-                <a href="#" class="action-link">
+                <a href="/myProduct" class="action-link">
                     <span class="icon">📦</span>
-                    <span>Your Products</span>
+                    <span>My Products</span>
                 </a>
             </div>
         </div>

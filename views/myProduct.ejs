@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planta - Marketplace</title>
+    <link rel="stylesheet" href="/css/marketPlace.css">
+</head>
+<body>
+    <div class="background-image"></div>
+    
+    <!-- Header -->
+     <!--/* copied from home nav */-->
+    <header class="header">
+        <div class="containerNav">
+            <nav class="nav">
+                <a href="#" class="logo">
+                    <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+                        <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+                    </svg>
+                    <span class="logo-text">Planta</span>
+                </a>
+                <div class="nav-links">
+                    
+                    <a href="/home">Home</a>
+                    <a href="/marketPlace">Marketplace</a>
+                    <a href="/tutorial">Tutorials</a>
+                    <a href="/weather">Weather</a>
+                    <a href="/blog">Blog</a>
+                    <a href="/agridoc">AgriDoctor</a>
+                </div>
+                <div class="nav-buttons">
+                    <%- include("layout/loginOutUser") %>
+                </div>
+            </nav>
+        </div>
+    </header>
+            <main>
+                <!-- <div>Hello</div> -->
+                <!-- Products Grid -->
+                 <div class="superProduct">
+                     <div class="products-grid" id="products-grid">
+                         <!-- Products will be rendered here by JavaScript -->
+                     </div>
+                     <!-- No Results -->
+                     <div class="no-results" id="no-results" style="display: none;">
+                         <p>No products match your search criteria.</p>
+                         <button class="clear-filters-btn" onclick="clearFilters()">Clear Filters</button>
+                     </div>
+
+                 </div>
+            </main>
+    <script>
+    const products = <%- JSON.stringify(products) %>;
+</script>
+    <script src="/js/myProduct.js"></script>
+    <%- include("layout/footer") %>
+</body>
+</html>
