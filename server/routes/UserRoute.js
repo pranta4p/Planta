@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/user');
+const User = require('../models/User');
 const Product=require('../models/Product');
 const Tutorial=require('../models/Tutorial')
 const Blog=require('../models/Blog');
@@ -128,8 +128,6 @@ router.get('/blog', async(req, res) => {
 
 })
 
-
-
 router.get('/agridoc', (req, res) => {
     const token = req.cookies.token;
     let f=0;
@@ -149,6 +147,8 @@ router.get('/logOut', (req, res) => {
   res.clearCookie('token');
   res.redirect('/home');
 });
+
+
 
 
 

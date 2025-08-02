@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer Dashboard - AgroConnect</title>
+    <link rel="stylesheet" href="/css/dash.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a class="logo">
+                    <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <!-- custom design path -->
+                        <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+                        <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+                    </svg>
+                    <span class="logo-text">Planta</span>
+                </a>
+                <div class="nav-links">
+                    <!-- href thakle mouse pointer hoi -->
+                    <a href="/home" style="font-weight: bold; color: #16a34a;">Home</a>
+                    <a href="/marketPlace">Marketplace</a>
+                    <a href="/tutorial">Tutorials</a>
+                    <a href="/weather">Weather</a>
+                    <a href="/blog">Blog</a>
+                    <a href="/agridoc">AgriDoctor</a>
+                </div>
+                <div class="nav-buttons">
+                    <a href="/logOut" class="btn btn-outline" id = "logIn">Log Out</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Dashboard -->
+    <div class="dashboard-container">
+        <div class="dashboard-card">
+            <!-- Profile Section -->
+            <div class="profile-section">
+                <div class="profile-image">
+                    <img src="public/farmer-profile.jpg" alt="Farmer Profile" />
+                </div>
+                <h1 class="farmer-name">John Smith</h1>
+                <p class="farmer-email">john.smith@agroconnect.com</p>
+            </div>
+
+            <!-- Action Links -->
+            <div class="action-links">
+                <a href="#" class="action-link">
+                    <span class="icon">🛒</span>
+                    <span>Your Cart</span>
+                </a>
+                <a href="#" class="action-link">
+                    <span class="icon">📦</span>
+                    <span>Your Products</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- <script src="transferPage.js"></script> -->
+</body>
+</html>
