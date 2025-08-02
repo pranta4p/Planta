@@ -281,6 +281,30 @@ router.get('/tutorialsAdd',authMiddleware, (req, res) => {
 })
 
 
+router.get('/dash', async(req, res) => {
+    const token = req.cookies.token;
+    let f = 0;
+    let userData = null;
+
+    if (token) {
+        try {
+            const decoded = jwt.verify(token, jwtSecret);
+            const userId = decoded.userId;
+
+            userData = await User.findById(userId); 
+
+            f = 1;
+            console.log(userData);
+
+        } catch (err) {
+            console.error("Invalid token", err.message);
+        }
+    }
+
+    res.render("dash", {f, userData});
+})
+
+
 
 //all get request /id:
 //------#####----------
@@ -313,6 +337,7 @@ router.get('/addToCart/:id',authMiddleware, async(req, res) => {
      }
      
 })
+
 
 
 

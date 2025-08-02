@@ -15,9 +15,7 @@ connectDB();
 
 app.use('/', require('./server/routes/UserRoute'));
 
-app.get('/dash', async(req, res) => {
-    res.render("dash", {});
-})
+
 
 app.listen(port, () => {
     console.log(`app listening on port http://localhost:${port}`);
