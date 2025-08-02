@@ -1,4 +1,4 @@
-function renderBlogs(blog) {
+function renderBlogs(BlogsToRender) {
     const grid = document.getElementById('bodyCard');
 
     grid.style.display = 'grid';
@@ -17,7 +17,7 @@ function renderBlogs(blog) {
     //     '<h1>Hello</h1>'
     // ].join('');
 }
-
+// console.log(blog);
 // console.log(blogs.title)
 
-renderBlogs(blogs);
+renderBlogs(blog);

@@ -116,7 +116,7 @@ router.get('/blog', async(req, res) => {
     let f=0;
 
     if(token){f=1;}
-    const blogs=await Blog.find();
+       const blogs=await Blog.find();
     res.render("blog", {blogs,f});
 
 })
@@ -126,9 +126,10 @@ router.get('/blogDetail/:id', async(req, res) => {
     let f=0;
     if(token){f=1;}
     const blogId = req.params.id;
-    const blogs = await Blog.findById(blogId);
-    console.log(blogs.title);
-    res.render("blogDetail", {blogs, f});
+    const blog = await Blog.findById(blogId);
+    console.log(blog.title);
+    console.log(blog);
+    res.render("blogDetail", {blog, f});
 })
 
 router.get('/agridoc', (req, res) => {
@@ -169,7 +170,7 @@ router.post(
       } = req.body;
     
         
-      const imagePath = req.file ? `./uploads/${req.file.filename}` : null;
+      const imagePath = req.file ? `/uploads/${req.file.filename}` : null;
 
       console.log(imagePath);
       const product = new Product({
@@ -226,7 +227,7 @@ router.post('/tutorialsAdd',authMiddleware,
       } = req.body;
     
         
-       const imagePath = req.file ? `./uploads/${req.file.filename}` : null;
+       const imagePath = req.file ? `/uploads/${req.file.filename}` : null;
       const user = await User.findById(req.user.userId);
       // console.log(imagePath);
       const tutorial = new Tutorial({
@@ -267,7 +268,7 @@ router.post('/blogAdd',authMiddleware,
       } = req.body;
     
         
-       const imagePath = req.file ? `./uploads/${req.file.filename}` : null;
+       const imagePath = req.file ? `/uploads/${req.file.filename}` : null;
       const user = await User.findById(req.user.userId);
       // console.log(imagePath);
       const blog = new Blog({
