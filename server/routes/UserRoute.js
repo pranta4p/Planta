@@ -282,20 +282,21 @@ router.get('/myCart', async (req, res) => {
         try {
             const decoded = jwt.verify(token, jwtSecret);
             const userId = decoded.userId;
-
-            userData = await User.findById(userId); 
-
+            userData=await User.findById(userId);
+            const cart = userData.cart; 
             f = 1;
+            
             // console.log(userData);
+            const products = await Product.find();
+            // console.log(products);
+            res.render("myCart", {f, cart,products,userData});
 
         } catch (err) {
             console.error("Invalid token", err.message);
         }
     }
 
-    const products = await Product.find();
-    console.log(products);
-    res.render("myCart", {f, userData, products});
+    
 });
 
 router.get('/myProduct', async (req, res) => {
@@ -364,14 +365,29 @@ router.get('/blogDetail/:id', async(req, res) => {
     if(token){f=1;}
     const blogId = req.params.id;
     const blog = await Blog.findById(blogId);
+    if(token){
+       const decoded = jwt.verify(token, jwtSecret);
+    const userId = decoded.userId;
+     
+    const userData = await User.findById(userId); 
+    
+    
+     return res.render("blogDetail", {blog,userData, f});
+    }
+    else{
+      const userData=null;
+      return res.render("blogDetail", {blog,userData, f});
+    }
+    
     // console.log(blog.title);
     // console.log(blog);
-    res.render("blogDetail", {blog, f});
+
+   
 })
 
 router.get('/addToCart/:id',authMiddleware, async(req, res) => {
      try {
-       const productId = req.params.id;
+       const productId = req.params._id;
      const user = await User.findById(req.user.userId);
      user.cart.push(productId);
      await user.save();
