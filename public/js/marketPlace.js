@@ -63,30 +63,6 @@ function renderProducts(productsToRender) {
     `).join('');
 }
 
-// function addToCart(productId) {
-//     const existingItem = cart.find(item => item.id === productId);
-//     // console.log(existingItem);
-
-//     if (existingItem) {
-//         existingItem.quantity += 1;
-//     } else {
-//         cart.push({ id: productId, quantity: 1 });
-//         console.log(cart);
-//     }
-
-//     // updateCartCount();
-// }
-
-// function updateCartCount() {
-//     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-//     document.getElementById('cart-count').textContent = totalItems;
-
-//     if (totalItems > 0) {
-//         document.getElementById('cart-count').style.display = 'flex';
-//     } else {
-//         document.getElementById('cart-count').style.display = 'none';
-//     }
-// }
 
 function filterProducts() {
     const searchTerm = document.getElementById('search').value.toLowerCase();

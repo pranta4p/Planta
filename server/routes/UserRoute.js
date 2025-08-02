@@ -269,7 +269,7 @@ router.get('/marketPlace', async (req, res) => {
     }
 
     const products = await Product.find();
-    // console.log(products[0].id);
+    console.log(userData);
     res.render("marketPlace", {f, userData, products});
 });
 
@@ -387,14 +387,15 @@ router.get('/blogDetail/:id', async(req, res) => {
 
 router.get('/addToCart/:id',authMiddleware, async(req, res) => {
      try {
-       const productId = req.params._id;
-     const user = await User.findById(req.user.userId);
-     user.cart.push(productId);
-     await user.save();
-    return res.status(401).render("messagePage", {
-       message: "Added to your card",
-     redirectUrl: "/marketPlace"
-     });
+        const productId = req.params.id;
+        const user = await User.findById(req.user.userId);
+        // console.log(productId);
+        user.cart.push(productId);
+        await user.save();
+        return res.status(401).render("messagePage", {
+          message: "Added to your card",
+          redirectUrl: "/marketPlace"
+        });
      } catch (error) {
       res.status(400).send(error);
      }
