@@ -1,5 +1,5 @@
 document.getElementById('submitBtn').addEventListener("click", (event) => {
-    event.preventDefault(); // Stops the form from submitting
+    // event.preventDefault(); // Stops the form from submitting
 
     const name = document.getElementById('name').value;
     const title = document.getElementById('title').value;
@@ -12,4 +12,3 @@ document.getElementById('submitBtn').addEventListener("click", (event) => {
 
     alert("value has been taken");
 });
-console.log("HHH");
