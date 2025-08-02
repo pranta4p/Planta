@@ -121,16 +121,7 @@ router.get('/blog', async(req, res) => {
 
 })
 
-router.get('/blogDetail/:id', async(req, res) => {
-    const token = req.cookies.token;
-    let f=0;
-    if(token){f=1;}
-    const blogId = req.params.id;
-    const blog = await Blog.findById(blogId);
-    console.log(blog.title);
-    console.log(blog);
-    res.render("blogDetail", {blog, f});
-})
+
 
 router.get('/agridoc', (req, res) => {
     const token = req.cookies.token;
@@ -158,6 +149,7 @@ router.post(
   upload.single('img'), 
   async (req, res) => {
     try {
+      const user = await User.findById(req.user.userId);
       const {
         name,
         type,
@@ -184,9 +176,10 @@ router.post(
         description,
         image: imagePath,
       });
-      console.log(product);
-      await product.save();
-
+      // console.log(product);
+      const savedproduct=await product.save();
+      user.postedProducts.push(savedproduct._id);
+       await user.save();
       res.redirect('/marketPlace');
     } catch (error) {
       console.error(error);
@@ -243,7 +236,11 @@ router.post('/tutorialsAdd',authMiddleware,
         image: imagePath,
       });
       // console.log(tutorial);
-      const p=await tutorial.save();
+       
+      const savedtutorial=await tutorial.save();
+      user.postedTutorials.push(savedtutorial._id);
+       await user.save()
+      // console.log(user);
       res.redirect('/tutorial');
     } catch (error) {
       console.error(error);
@@ -282,8 +279,11 @@ router.post('/blogAdd',authMiddleware,
         image: imagePath,
       });
       // console.log(blog);
-      const p=await blog.save();
-      if(p)console.log("bolg added successfully");
+      const savedblog=await blog.save();
+      user.postedBlogs.push(savedblog._id);
+       await user.save();
+       console.log(user);
+      if(savedblog)console.log("bolg added successfully");
       res.redirect('/blog');
     } catch (error) {
       console.error(error);
@@ -291,6 +291,51 @@ router.post('/blogAdd',authMiddleware,
     }
   
 })
+
+
+
+
+//all get /id:
+//------#####----------
+
+
+
+
+
+router.get('/blogDetail/:id', async(req, res) => {
+    const token = req.cookies.token;
+    let f=0;
+    if(token){f=1;}
+    const blogId = req.params.id;
+    const blog = await Blog.findById(blogId);
+    console.log(blog.title);
+    console.log(blog);
+    res.render("blogDetail", {blog, f});
+})
+
+router.get('/addToCard/:id',authMiddleware, async(req, res) => {
+     try {
+       const productId = req.params.id;
+     const user = await User.findById(req.user.userId);
+     user.cart.push(productId);
+     await user.save();
+    return res.status(401).render("messagePage", {
+       message: "Added to your card",
+     redirectUrl: "/marketPlace"
+     });
+     } catch (error) {
+      res.status(400).send(error);
+     }
+     
+})
+
+
+
+
+
+
+//Log in signup portion
+//------#####----------
 
 
 

@@ -14,6 +14,28 @@ const UserSchema = new Schema({
    name: {
     type: String,
   },
+   postedProducts: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Product'
+  }],
+
+  cart: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Product'
+  }],
+  postedTutorials:[
+    {
+    type: Schema.Types.ObjectId,
+    ref: 'Tutorial'
+  }
+  ],
+   postedBlogs:[
+    {
+    type: Schema.Types.ObjectId,
+    ref: 'Blog'
+  }
+  ]
+
 });
 
 module.exports=mongoose.model('User',UserSchema);
