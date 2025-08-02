@@ -398,7 +398,23 @@ router.get('/addToCart/:id',authMiddleware, async(req, res) => {
 })
 
 
+//delete request
+//------#####----
 
+router.delete('/removeFromCart/:id', authMiddleware, async (req, res) => {
+  const productId = req.params.id;
+  const userId = req.user.userId;
+  try {
+    await User.findByIdAndUpdate(userId, {
+      $pull: { cart: productId } 
+    });
+
+    res.json({ message: 'Removed from cart successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error removing item from cart' });
+  }
+});
 
 
 
