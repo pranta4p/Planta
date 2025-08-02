@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Centered Card</title>
+  <link rel="stylesheet" href="/css/blogDetail.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a class="logo">
+                    <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+
+
+                        <!-- custom design path -->
+                        <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+                        <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+
+
+
+                    </svg>
+                    <span class="logo-text">Planta</span>
+                </a>
+                <div class="nav-links">
+                    <!-- href thakle mouse pointer hoi -->
+                    <a href="/home" style="font-weight: bold; color: #16a34a;">Home</a>
+                    <a href="/marketPlace">Marketplace</a>
+                    <a href="/tutorial">Tutorials</a>
+                    <a href="/weather">Weather</a>
+                    <a href="/blog">Blog</a>
+                    <a href="/agridoc">AgriDoctor</a>
+                </div>
+                <div class="nav-buttons">
+                    <% if(f == 0){ %>
+                        <a href="/logIn" class="btn btn-outline" id = "logIn">Login</a>
+                        <a href="/signUp" class="btn btn-primary" id = "signUp">Sign Up</a>
+                    <% }else{ %>
+                        <a href="/logOut" class="btn btn-outline" id = "logIn">Log Out</a>
+                    <% } %>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <div class="bodyCard">
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1592921870583-aeafb0639ffe?q=80&w=1000&auto=format&fit=crop" alt="Card Image" class="card-img">
+          <h1 class="card-title">Your Title Here</h1>
+          <p class="card-desc">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce viverra, justo a facilisis gravida, 
+            ligula nulla dignissim mauris, sit amet porta augue nulla a turpis. Proin convallis ante sed turpis convallis,
+            nec porta odio eleifend. Etiam ut nulla in lorem rutrum dictum.
+          </p>
+        </div>
+    </div>
+</body>
+</html>

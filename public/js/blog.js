@@ -81,7 +81,7 @@ function renderBlogs(BlogsToRender) {
                 <p class="blog-excerpt">
                     ${blog.description}
                 </p>
-                <a href="#" class="blog-button">Read Full Story</a>
+                <a href="/blogDetail" class="blog-button">Read Full Story</a>
             </div>
         </div>
     `).join('');

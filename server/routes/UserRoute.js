@@ -121,15 +121,22 @@ router.get('/blog', (req, res) => {
     res.render("blog", {f});
 })
 
+router.get('/blogAdd',authMiddleware, (req, res) => {
+    res.render("blogAdd", {});
+})
+
+router.get('/blogDetail', (req, res) => {
+    const token = req.cookies.token;
+    let f=0;
+    if(token){f=1;}
+    res.render("blogDetail", {f});
+})
+
 router.get('/agridoc', (req, res) => {
     const token = req.cookies.token;
     let f=0;
     if(token){f=1;}
     res.render("agridoc", {f});
-})
-
-router.get('/blogAdd',authMiddleware, (req, res) => {
-    res.render("blogAdd", {});
 })
 
 router.get('/logIn', (req, res) => {
