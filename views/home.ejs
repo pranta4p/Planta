@@ -28,12 +28,7 @@
                     <a href="/agridoc">AgriDoctor</a>
                 </div>
                 <div class="nav-buttons">
-                    <% if(f == 0){ %>
-                        <a href="/logIn" class="btn btn-outline" id = "logIn">Login</a>
-                        <a href="/signUp" class="btn btn-primary" id = "signUp">Sign Up</a>
-                    <% }else{ %>
-                        <a href="/logOut" class="btn btn-outline" id = "logIn">Log Out</a>
-                    <% } %>
+                    <%- include("layout/loginOutUser") %>
                 </div>
             </nav>
         </div>
@@ -76,11 +71,11 @@
             <div class="stats-grid">
                 <!-- changes to -->
                 <div>
-                    <div class="stat-number">10,000+</div>
+                    <div class="stat-number"><%= countUsers %></div>
                     <div class="stat-label">Farmers Connected</div>
                 </div>
                 <div>
-                    <div class="stat-number">50,000+</div>
+                    <div class="stat-number"><%= products.length %></div>
                     <div class="stat-label">Products Listed</div>
                 </div>
                 <div>

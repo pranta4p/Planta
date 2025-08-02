@@ -12,6 +12,7 @@ const path =require('path')
 const jwtSecret = process.env.JWT_SECRET;
 const cookieParser = require('cookie-parser');
 router.use(cookieParser());
+require('dotenv').config();
 
 console.log("HHH");
 /**
@@ -77,19 +78,55 @@ const upload=multer({storage:storage});
 
 
 
-router.get('/', (req, res) => {
+router.get('/', async(req, res) => {
   const token = req.cookies.token;
-  let f=0;
-  if(token){f=1;}
-    res.render("home", {f});
+    let f = 0;
+    let userData = null;
+
+    if (token) {
+        try {
+            const decoded = jwt.verify(token, jwtSecret);
+            const userId = decoded.userId;
+
+            userData = await User.findById(userId); 
+
+            f = 1;
+            console.log(userData);
+
+        } catch (err) {
+            console.error("Invalid token", err.message);
+        }
+    }
+
+    const products=await Product.find();
+    const countUsers = await User.countDocuments();
+    res.render("home", {f, userData, products, countUsers});
 })
 
-router.get('/home', (req, res) => {
-   const token = req.cookies.token;
-  let f=0;
-  if(token){f=1;}
-    res.render("home", {f});
-})
+router.get('/home', async (req, res) => {
+    const token = req.cookies.token;
+    let f = 0;
+    let userData = null;
+
+    if (token) {
+        try {
+            const decoded = jwt.verify(token, jwtSecret);
+            const userId = decoded.userId;
+
+            userData = await User.findById(userId); 
+
+            f = 1;
+            console.log(userData);
+
+        } catch (err) {
+            console.error("Invalid token", err.message);
+        }
+    }
+
+    const products=await Product.find();
+    const countUsers = await User.countDocuments();
+    res.render("home", {f, userData, products, countUsers});
+});
 
 router.get('/marketPlaceProductAdd',authMiddleware, (req, res) => {
     res.render("marketPlaceProductAdd", {});
@@ -97,10 +134,26 @@ router.get('/marketPlaceProductAdd',authMiddleware, (req, res) => {
 
 router.get('/tutorial', async(req, res) => {
   const token = req.cookies.token;
-  let f=0;
-  if(token){f=1;}
-    const tutorials=await Tutorial.find();
-    res.render("tutorial", {tutorials,f});
+    let f = 0;
+    let userData = null;
+
+    if (token) {
+        try {
+            const decoded = jwt.verify(token, jwtSecret);
+            const userId = decoded.userId;
+
+            userData = await User.findById(userId); 
+
+            f = 1;
+            console.log(userData);
+
+        } catch (err) {
+            console.error("Invalid token", err.message);
+        }
+    }
+
+    const tutorials = await Tutorial.find();
+    res.render("tutorial", {f, userData, tutorials});
 })
 
 router.get('/tutorialsAdd',authMiddleware, async(req, res) => {
@@ -111,28 +164,75 @@ router.get('/tutorialsAdd',authMiddleware, async(req, res) => {
   }
 })
 
-router.get('/weather', (req, res) => {
+router.get('/weather', async(req, res) => {
   const token = req.cookies.token;
-  let f=0;
-  if(token){f=1;}
-    res.render("weather", {f});
+    let f = 0;
+    let userData = null;
+
+    if (token) {
+        try {
+            const decoded = jwt.verify(token, jwtSecret);
+            const userId = decoded.userId;
+
+            userData = await User.findById(userId); 
+
+            f = 1;
+            console.log(userData);
+
+        } catch (err) {
+            console.error("Invalid token", err.message);
+        }
+    }
+
+    res.render("weather", {f, userData});
 })
 
 router.get('/blog', async(req, res) => {
     const token = req.cookies.token;
-    let f=0;
+    let f = 0;
+    let userData = null;
 
-    if(token){f=1;}
-       const blogs=await Blog.find();
-    res.render("blog", {blogs,f});
+    if (token) {
+        try {
+            const decoded = jwt.verify(token, jwtSecret);
+            const userId = decoded.userId;
+
+            userData = await User.findById(userId); 
+
+            f = 1;
+            console.log(userData);
+
+        } catch (err) {
+            console.error("Invalid token", err.message);
+        }
+    }
+
+    const blogs = await Blog.find();
+    res.render("blog", {f, userData, blogs});
 
 })
 
-router.get('/agridoc', (req, res) => {
+router.get('/agridoc', async(req, res) => {
     const token = req.cookies.token;
-    let f=0;
-    if(token){f=1;}
-    res.render("agridoc", {f});
+    let f = 0;
+    let userData = null;
+
+    if (token) {
+        try {
+            const decoded = jwt.verify(token, jwtSecret);
+            const userId = decoded.userId;
+
+            userData = await User.findById(userId); 
+
+            f = 1;
+            console.log(userData);
+
+        } catch (err) {
+            console.error("Invalid token", err.message);
+        }
+    }
+
+    res.render("agridoc", {f, userData});
 })
 
 router.get('/logIn', (req, res) => {
@@ -153,17 +253,27 @@ router.get('/logOut', (req, res) => {
 
 
 router.get('/marketPlace', async (req, res) => {
-  try {
-    const token = req.cookies.token;
-    let f=0;
-    if(token){f=1;}
+  const token = req.cookies.token;
+    let f = 0;
+    let userData = null;
 
-    const products = await Product.find(); 
-    res.render("marketPlace", { products, f }); 
-  } catch (error) {
-    console.error("Error fetching products:", error);
-    res.status(500).send("Server Error");
-  }
+    if (token) {
+        try {
+            const decoded = jwt.verify(token, jwtSecret);
+            const userId = decoded.userId;
+
+            userData = await User.findById(userId); 
+
+            f = 1;
+            console.log(userData);
+
+        } catch (err) {
+            console.error("Invalid token", err.message);
+        }
+    }
+
+    const products = await Product.find();
+    res.render("marketPlace", {f, userData, products});
 });
 
 router.get('/tutorialsAdd',authMiddleware, (req, res) => {
