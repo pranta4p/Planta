@@ -73,20 +73,6 @@ router.get('/home', (req, res) => {
     res.render("home", {f});
 })
 
-router.get('/marketPlace', async (req, res) => {
-  try {
-  const token = req.cookies.token;
-  let f=0;
-  if(token){f=1;}
-
-    const products = await Product.find(); 
-    res.render("marketPlace", { products, f }); 
-  } catch (error) {
-    console.error("Error fetching products:", error);
-    res.status(500).send("Server Error");
-  }
-});
-
 router.get('/marketPlaceProductAdd',authMiddleware, (req, res) => {
     res.render("marketPlaceProductAdd", {});
 })
@@ -197,8 +183,12 @@ router.post(
 
 router.get('/marketPlace', async (req, res) => {
   try {
+    const token = req.cookies.token;
+    let f=0;
+    if(token){f=1;}
+
     const products = await Product.find(); 
-    res.render("marketPlace", { products }); 
+    res.render("marketPlace", { products, f }); 
   } catch (error) {
     console.error("Error fetching products:", error);
     res.status(500).send("Server Error");
