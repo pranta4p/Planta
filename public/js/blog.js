@@ -1,29 +1,29 @@
-const blogs = [
-    {
-        id: 1,
-        title: "My Journey with Organic Tomato Farming",
-        summary : "How I increased my tomato yield by 40% using only organic methods",
-        author_name : "John Doe",
-        date : "May 15, 2024",
-        attribute1 : "Organic",
-        attribute2 : "Tomatoes",
-        attribute3 : "Success Story",
-        description : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        image: "https://images.unsplash.com/photo-1592921870583-aeafb0639ffe?q=80&w=1000&auto=format&fit=crop"
-    },
-    {
-        id: 2,
-        title: "Water Conservation Techniques That Saved My Farm",
-        summary : "During the drought, these methods helped us reduce water usage by 30%",
-        author_name : "Sarah Johnson",
-        date : "April 22, 2024",
-        attribute1 : "Water Conservation",
-        attribute2 : "Drought",
-        attribute3 : "Sustainability",
-        description : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=1000&auto=format&fit=crop"
-    },
-];
+// const blogs = [
+//     {
+//         id: 1,
+//         title: "My Journey with Organic Tomato Farming",
+//         summary : "How I increased my tomato yield by 40% using only organic methods",
+//         author_name : "John Doe",
+//         date : "May 15, 2024",
+//         attribute1 : "Organic",
+//         attribute2 : "Tomatoes",
+//         attribute3 : "Success Story",
+//         description : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+//         image: "https://images.unsplash.com/photo-1592921870583-aeafb0639ffe?q=80&w=1000&auto=format&fit=crop"
+//     },
+//     {
+//         id: 2,
+//         title: "Water Conservation Techniques That Saved My Farm",
+//         summary : "During the drought, these methods helped us reduce water usage by 30%",
+//         author_name : "Sarah Johnson",
+//         date : "April 22, 2024",
+//         attribute1 : "Water Conservation",
+//         attribute2 : "Drought",
+//         attribute3 : "Sustainability",
+//         description : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+//         image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=1000&auto=format&fit=crop"
+//     },
+// ];
 // name need to be blogs with a 's' meaning not blog
 
 function renderBlogs(BlogsToRender) {

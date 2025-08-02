@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require('../models/user');
 const Product=require('../models/Product');
 const Tutorial=require('../models/Tutorial')
+const Blog=require('../models/Blog');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const multer=require('multer')
@@ -31,7 +32,8 @@ const authMiddleware = (req, res, next ) => {
 
   try {
     const decoded = jwt.verify(token, jwtSecret);
-    req.userId = decoded.userId;
+    // req.userId = decoded.userId;
+    req.user = { userId: decoded.userId };
     next();
   } catch(error) {
     res.status(401).json( { message: 'Unauthorized'} );
@@ -109,15 +111,14 @@ router.get('/weather', (req, res) => {
     res.render("weather", {f});
 })
 
-router.get('/blog', (req, res) => {
+router.get('/blog', async(req, res) => {
     const token = req.cookies.token;
     let f=0;
-    if(token){f=1;}
-    res.render("blog", {f});
-})
 
-router.get('/blogAdd',authMiddleware, (req, res) => {
-    res.render("blogAdd", {});
+    if(token){f=1;}
+    const blogs=await Blog.find();
+    res.render("blog", {blogs,f});
+
 })
 
 router.get('/blogDetail', (req, res) => {
@@ -218,6 +219,7 @@ router.post('/tutorialsAdd',authMiddleware,
         attribute1,
         attribute2, 
         attribute3,
+        videoLink,
       } = req.body;
     
         
@@ -233,6 +235,7 @@ router.post('/tutorialsAdd',authMiddleware,
         attribute2, 
         attribute3,
         author_name:user.name,
+        videoLink,
         image: imagePath,
       });
       // console.log(tutorial);
@@ -247,6 +250,42 @@ router.post('/tutorialsAdd',authMiddleware,
 
 router.get('/blogAdd',authMiddleware, (req, res) => {
     res.render("blogAdd", {});
+})
+router.post('/blogAdd',authMiddleware,
+  upload.single('img'), async(req, res) => {
+     try {
+      const {
+        title,
+        summary,
+        description,
+        attribute1,
+        attribute2, 
+        attribute3,
+      } = req.body;
+    
+        
+       const imagePath = req.file ? `./uploads/${req.file.filename}` : null;
+      const user = await User.findById(req.user.userId);
+      // console.log(imagePath);
+      const blog = new Blog({
+        title,
+        summary,
+        author_name:user.name,
+        attribute1,
+        attribute2, 
+        attribute3,
+        description,
+        image: imagePath,
+      });
+      // console.log(blog);
+      const p=await blog.save();
+      if(p)console.log("bolg added successfully");
+      res.redirect('/blog');
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Failed to add Blog');
+    }
+  
 })
 
 

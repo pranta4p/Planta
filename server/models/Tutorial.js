@@ -32,7 +32,7 @@ const tutorialSchema = new mongoose.Schema({
   },
   videoLink: {
     type: String,
-    required: true
+    
   },
 }, {
   timestamps: true
