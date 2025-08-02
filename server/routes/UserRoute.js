@@ -9,7 +9,7 @@ const jwt = require('jsonwebtoken');
 const multer=require('multer')
 const path =require('path')
 const mongoose = require('mongoose');
-
+const fs = require('fs');
 const jwtSecret = process.env.JWT_SECRET;
 const cookieParser = require('cookie-parser');
 router.use(cookieParser());
@@ -297,30 +297,32 @@ router.get('/myCart',authMiddleware, async (req, res) => {
         }
 });
 
-router.get('/myProduct', async (req, res) => {
-  const token = req.cookies.token;
-    let f = 0;
-    let userData = null;
+router.get('/myProduct', authMiddleware, async (req, res) => {
+  let f = 0;
 
-    if (token) {
-        try {
-            const decoded = jwt.verify(token, jwtSecret);
-            const userId = decoded.userId;
-
-            userData = await User.findById(userId); 
-
-            f = 1;
-            // console.log(userData);
-
-        } catch (err) {
-            console.error("Invalid token", err.message);
-        }
+  try {
+    const userData = await User.findById(req.user.userId); 
+    if (!userData || !userData.postedProducts) {
+      return res.render("myProduct", { f, products: [], userData });
     }
 
-    const products = await Product.find();
-    // console.log(products);
-    res.render("myProduct", {f, userData, products});
+    const posted = userData.postedProducts;
+
+    const validPostedIds = posted.filter(
+      id => mongoose.Types.ObjectId.isValid(id)
+    );
+
+    const products = await Product.find({ _id: { $in: validPostedIds } });
+
+    f = 1;
+    return res.render("myProduct", { f, userData, products });
+
+  } catch (err) {
+    console.error("Error loading myProduct:", err.message);
+    return res.status(500).send("Internal Server Error");
+  }
 });
+
 
 router.get('/tutorialsAdd',authMiddleware, (req, res) => {
     res.render("tutorialsAdd", {});
@@ -415,6 +417,46 @@ router.delete('/removeFromCart/:id', authMiddleware, async (req, res) => {
     res.status(500).json({ message: 'Error removing item from cart' });
   }
 });
+
+
+router.delete('/deleteProduct/:id', authMiddleware, async (req, res) => {
+  const productId = req.params.id;
+  const userId = req.user.userId;
+
+  try {
+    //  Remove product ID from user's postedProducts array
+    await User.findByIdAndUpdate(userId, {
+      $pull: { postedProducts: productId }
+    });
+
+    //  Find the product
+    const product = await Product.findById(productId);
+    if (!product) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+
+    //  Delete image file if exists
+    if (product.image) {
+      const imagePath = path.join(__dirname, '..', product.image); 
+      fs.unlink(imagePath, (err) => {
+        if (err) {
+          console.warn(`Failed to delete image: ${imagePath}`);
+        } else {
+          console.log(`Image deleted: ${imagePath}`);
+        }
+      });
+    }
+
+    //  Delete product from DB
+    await Product.findByIdAndDelete(productId);
+
+    res.json({ message: 'Product deleted successfully' });
+  } catch (error) {
+    console.error('Delete Error:', error);
+    res.status(500).json({ message: 'Error deleting product' });
+  }
+});
+
 
 
 
