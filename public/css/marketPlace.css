@@ -314,6 +314,11 @@ body {
     color: #6b7280;
     margin-bottom: 1rem;
     font-size: 0.875rem;
+    display: -webkit-box;
+  -webkit-line-clamp: 4;       /* Approx ~50 words, adjust as needed */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .product-details {
