@@ -24,7 +24,7 @@ function renderProducts(productsToRender) {
                         <span class="product-badge">${product.type}</span>
                     </div>
                     <div class="product-price">
-                        <span class="price-amount">$${product.price}</span>
+                        <span class="price-amount">${product.price} Taka</span>
                         <p class="price-unit">per ${product.unit}</p>
                     </div>
                 </div>

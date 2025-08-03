@@ -267,7 +267,6 @@ router.get('/marketPlace', async (req, res) => {
             const userId = decoded.userId;
 
             userData = await User.findById(userId); 
-
             f = 1;
             // console.log(userData);
 
@@ -710,3 +709,13 @@ router.post('/signUp',upload.single('img'), async(req, res) => {
 
 
 module.exports=router;
+
+
+  //  const result = await User.deleteMany({});
+  //              if(result)console.log("all user deleted");
+  //              const re1 = await Product.deleteMany({});
+  //              if(re1)console.log("all product deleted");
+  //              const re2 = await Blog.deleteMany({});
+  //              if(re2)console.log("all blog deleted");
+  //              const re3 = await Tutorial.deleteMany({});
+  //              if(re2)console.log("all turorial deleted");
