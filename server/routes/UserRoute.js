@@ -398,6 +398,14 @@ router.get('/addToCart/:id',authMiddleware, async(req, res) => {
         const productId = req.params.id;
         const user = await User.findById(req.user.userId);
         // console.log(productId);
+        
+        const exist=user.postedProducts.some(id=>id.equals(productId))
+        if(exist){
+           return res.status(401).render("messagePage", {
+          message: "Your self Product can not be added",
+          redirectUrl: "/marketPlace"
+           });
+        }
         user.cart.push(productId);
         await user.save();
         return res.status(401).render("messagePage", {

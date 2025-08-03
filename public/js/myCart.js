@@ -21,7 +21,7 @@ function renderProducts(productsToRender) {
                         <span class="product-badge">${product.type}</span>
                     </div>
                     <div class="product-price">
-                        <span class="price-amount">$${product.price}</span>
+                        <span class="price-amount"> ${product.price} Taka</span>
                         <p class="price-unit">per ${product.unit}</p>
                     </div>
                 </div>
@@ -47,7 +47,7 @@ function renderProducts(productsToRender) {
                         <span>Seller: ${product.seller}</span>
                     </div>
                 </div>
-                <button class="add-to-cart-btn" onclick="alert('${product._id}')">
+                <button class="add-to-cart-btn" onclick="deleteCart('${product._id}')">
                     <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.1 5.1a1 1 0 001 1.1h9.2a1 1 0 001-1.1L16 13m-5 3v4m2-4v4"></path>
                     </svg>
