@@ -121,6 +121,10 @@ body {
 }
 /*// copied from home nav */
 
+.buyAll{
+    padding: 100px;
+}
+
 /* AI button */
 .AIchat-btn {
     position: fixed;
