@@ -189,7 +189,7 @@ body {
 
 .weather-app {
     min-height: 100vh;
-    background-image: url('panoramic-view-sunset.jpg');
+    background-image: url('/uploads/panoramic-view-sunset.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
