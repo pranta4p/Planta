@@ -336,6 +336,10 @@ router.get('/tutorialsAdd',authMiddleware, (req, res) => {
     res.render("tutorialsAdd", {});
 })
 
+router.get('/contactUs',authMiddleware, (req, res) => {
+    res.render("contactUs", {});
+})
+
 
 router.get('/dash', async(req, res) => {
     const token = req.cookies.token;

@@ -7,7 +7,7 @@ const productSchema = new mongoose.Schema({
   },
   type: {
     type: String,
-    enum: ['Vegetables', 'Fruits', 'Grains', 'Seeds', 'Other'],
+    // enum: ['Vegetables', 'Fruits', 'Grains', 'Seeds', 'Other'],
     required: true,
   },
   location: {
