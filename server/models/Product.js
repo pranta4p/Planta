@@ -7,11 +7,12 @@ const productSchema = new mongoose.Schema({
   },
   type: {
     type: String,
-    enum: ['Vegetables', 'Fruits', 'Grains', 'Seeds', 'Other','Supplies'],
+    enum: ['Vegetables', 'Fruits', 'Grains', 'Seeds', 'Other'],
     required: true,
   },
   location: {
     type: String,
+    // enum: ['Rajshahi', 'Sylhet', 'Dhaka', 'Mymensigh', 'Khulna', 'Rangpur', 'Barishal'],
     required: true,
   },
   price: {
