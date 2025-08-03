@@ -53,6 +53,9 @@ function renderProducts(productsToRender) {
                     </svg>
                     Delete From Cart
                 </button>
+                <button class = "buyNow">
+                    Buy Now
+                </button>
             </div>
         </div>
     `).join('');

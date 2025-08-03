@@ -247,6 +247,10 @@ router.get('/aboutUs', (req, res) => {
     res.render("aboutUs", {});
 })
 
+router.get('/privacyPolicy', (req, res) => {
+    res.render("privacyPolicy", {});
+})
+
 router.get('/logOut', (req, res) => {
   res.clearCookie('token');
   res.redirect('/home');
