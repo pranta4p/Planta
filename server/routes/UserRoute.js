@@ -243,6 +243,10 @@ router.get('/signUp', (req, res) => {
     res.render("signUp", {});
 })
 
+router.get('/aboutUs', (req, res) => {
+    res.render("aboutUs", {});
+})
+
 router.get('/logOut', (req, res) => {
   res.clearCookie('token');
   res.redirect('/home');
